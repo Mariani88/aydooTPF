@@ -16,7 +16,6 @@ public class InformacionEstadisticaTest {
 		InformacionEstadistica info = new InformacionEstadistica();
 		List <Integer> bicicletasMasUsadasEsperadas = new LinkedList<Integer>();
 		
-		Map <Integer,Integer> bicicletasMasUsadas = new HashMap <Integer, Integer>();
 		info.getBicicletasMasUsadas().put(3, 40);
 		info.getBicicletasMasUsadas().put(4, 40);
 		
@@ -24,6 +23,24 @@ public class InformacionEstadisticaTest {
 		bicicletasMasUsadasEsperadas.add(4);
 		
 		Assert.assertEquals(bicicletasMasUsadasEsperadas, info.bicicletasMasUsadas());
+	}
+	
+	
+	@Test
+	public void getBicicletasMenosUsadasDebeDevolverListaDeBicicletasMenosUsadas(){
+		InformacionEstadistica info = new InformacionEstadistica();
+		List <Integer> bicicletasMenosUsadasEsperadas = new LinkedList<Integer>();
+		
+		info.getBicicletasMenosUsadas().put(3, 40);
+		info.getBicicletasMenosUsadas().put(4, 40);
+		
+		bicicletasMenosUsadasEsperadas.add(3);
+		bicicletasMenosUsadasEsperadas.add(4);
+		
+		Assert.assertEquals(bicicletasMenosUsadasEsperadas, info.bicicletasMenosUsadas());
+		
+		
+		
 	}
 	
 	

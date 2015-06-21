@@ -73,5 +73,14 @@ public class InformacionEstadistica {
 		bicicletas.addAll(this.bicicletasMasUsadas.keySet());
 		
 		return bicicletas;
+	}
+
+
+	public Object bicicletasMenosUsadas() {
+		
+		List <Integer> bicicletas = new LinkedList <Integer> ();
+		bicicletas.addAll(this.bicicletasMenosUsadas.keySet());
+		
+		return bicicletas;
 	}	
 }
