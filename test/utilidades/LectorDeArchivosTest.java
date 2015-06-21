@@ -1,4 +1,4 @@
-package utiles;
+package utilidades;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -8,6 +8,8 @@ import java.util.zip.ZipFile;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import utilidades.LectorDeArchivos;
 
 public class LectorDeArchivosTest {
 	
