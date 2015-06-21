@@ -17,6 +17,23 @@ public class RecorridoDTO {
 	public int getIdEstacionDestino() {
 		return this.idEstacionDestino;
 	}
+	
+	public boolean equals (Object obj){
+		
+		boolean iguales = this == obj;
+		
+		if (!iguales && obj != null && obj instanceof RecorridoDTO) {
+
+			RecorridoDTO obje = (RecorridoDTO) obj;
+			iguales = this.idEstacionDestino == obje.getIdEstacionDestino()
+					&& this.idEstacionOrigen == obje.getIdEstacionOrigen();
+		}
+		
+		return iguales;
+	}
+	
+	
+	
 }
 
 

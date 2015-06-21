@@ -10,38 +10,49 @@ import org.junit.Test;
 
 public class InformacionEstadisticaTest {
 
+	private InformacionEstadistica info = new InformacionEstadistica();
+	
 	@Test
 	public void getBicicletasMasUsadasDebeDevolverListaDeBicicletasMasUsadas(){
 		
-		InformacionEstadistica info = new InformacionEstadistica();
 		List <Integer> bicicletasMasUsadasEsperadas = new LinkedList<Integer>();
 		
-		info.getBicicletasMasUsadas().put(3, 40);
-		info.getBicicletasMasUsadas().put(4, 40);
+		this.info.getBicicletasMasUsadas().put(3, 40);
+		this.info.getBicicletasMasUsadas().put(4, 40);
 		
 		bicicletasMasUsadasEsperadas.add(3);
 		bicicletasMasUsadasEsperadas.add(4);
 		
-		Assert.assertEquals(bicicletasMasUsadasEsperadas, info.bicicletasMasUsadas());
+		Assert.assertEquals(bicicletasMasUsadasEsperadas, this.info.bicicletasMasUsadas());
 	}
 	
 	
 	@Test
 	public void getBicicletasMenosUsadasDebeDevolverListaDeBicicletasMenosUsadas(){
-		InformacionEstadistica info = new InformacionEstadistica();
+		
 		List <Integer> bicicletasMenosUsadasEsperadas = new LinkedList<Integer>();
 		
-		info.getBicicletasMenosUsadas().put(3, 40);
-		info.getBicicletasMenosUsadas().put(4, 40);
+		this.info.getBicicletasMenosUsadas().put(3, 40);
+		this.info.getBicicletasMenosUsadas().put(4, 40);
 		
 		bicicletasMenosUsadasEsperadas.add(3);
 		bicicletasMenosUsadasEsperadas.add(4);
 		
-		Assert.assertEquals(bicicletasMenosUsadasEsperadas, info.bicicletasMenosUsadas());
+		Assert.assertEquals(bicicletasMenosUsadasEsperadas, this.info.bicicletasMenosUsadas());		
+	}
+	
+	@Test
+	public void getRecorridosMasUsados (){
+		
+		
+		
+		
+		
 		
 		
 		
 	}
+	
 	
 	
 }
