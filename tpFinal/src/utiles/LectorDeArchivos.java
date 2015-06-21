@@ -21,8 +21,18 @@ public class LectorDeArchivos {
 		return archivoZip;
 	}
 
-	public Enumeration<? extends ZipEntry> descomprimirZip(ZipFile zipFile) {
+	public Enumeration<? extends ZipEntry> descomprimirArchivosDeZip(ZipFile zipFile) {
 		
-		return zipFile.entries();
+		Enumeration<? extends ZipEntry> listaDeArchivosCSVEnZip =  zipFile.entries();
+		
+		return listaDeArchivosCSVEnZip;
+	}
+
+	public void validarQueElArchivoSeaCSV(ZipEntry archivoCSV) {
+		String name = archivoCSV.getName();
+		if(!name.contains(".csv")){
+			throw new IllegalArgumentException("El archivo con el nombre "+name+
+					" no es un archivo csv");
+		}
 	}
 }
