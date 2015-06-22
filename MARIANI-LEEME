@@ -1,4 +1,16 @@
 Tareas completadas:
 
 1- Termine RecorridoDTO, con los test y todo
-2- 
+2- Informacion estadistica esta casi terminado, tiene lo siguiente:
+
+guarda maximo y minimo de bicicletas y maximo de recorridos solo si lo que se le pasa es un maximo, minimo etc.
+Si se pasa como parametro un valor que no es maximo, minimo etc, arroja una excepcion. El valor pasado ira almacenado
+en un Map que ira despues al gestor de archivos, si no se usara excepciones, se almacenarian datos que no deben ir 
+(maximos que no lo son, por ejemplo)
+
+Pendiente a charlar: Queda pendiente ver donde implementamos el comportamiento de evaluar si es un maximo o no. Si en InformacionEstadistica
+o en ProcesadorEstadistico. Si ProcesadorEstadistico se encarga de eso, Informacion estadistica debera de implementar metodos
+que devuelvan el maximo, minimo, etc. 
+
+ 
+
