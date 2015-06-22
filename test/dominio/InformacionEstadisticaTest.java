@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import excepciones.BicicletaMasUsadaExcepcion;
 import excepciones.BicicletaMenosUsadaExcepcion;
+import excepciones.RecorridoMasRealizadoExcepcion;
 import utilidades.RecorridoDTO;
 
 public class InformacionEstadisticaTest {
@@ -70,6 +71,21 @@ public class InformacionEstadisticaTest {
 		this.info.guardarBicicletasMenosUsadas(2, 1);
 		this.info.guardarBicicletasMenosUsadas(3, 2);
 	}
+	
+	@Test(expected=RecorridoMasRealizadoExcepcion.class)
+	public void excepcionSiSeIntentaGuardarUnRecorridoMenosRealizadoQueElMaximo (){
+		this.info.guardarRecorridoMasRealizado(new RecorridoDTO (1,2), 3);
+		this.info.guardarRecorridoMasRealizado(new RecorridoDTO (3,4), 1);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

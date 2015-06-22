@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 
 import excepciones.BicicletaMasUsadaExcepcion;
 import excepciones.BicicletaMenosUsadaExcepcion;
+import excepciones.RecorridoMasRealizadoExcepcion;
 import utilidades.RecorridoDTO;
 
 public class InformacionEstadistica {
@@ -85,7 +86,7 @@ public class InformacionEstadistica {
 			this.recorridoMasRealizado.clear();
 			this.recorridoMasRealizado.put(recorrido, cantidad);
 		}else{
-			throw new BicicletaMenosUsadaExcepcion ();
+			throw new RecorridoMasRealizadoExcepcion ();
 		}
 		
 	}
