@@ -13,6 +13,7 @@ import utilidades.LectorDeArchivos;
 
 public class LectorDeArchivosTest {
 	
+	private static final String DOCUMENTOS_ARCHIVOS_ZIP_PARA_TEST_RECORRIDOS_2010_ZIP = "documentos/archivos zip para test/recorridos-2010.zip";
 	private static final String PATH_ARCHIVOS_ZIP = "documentos/archivos zip para test";
 	private static final String PATH_ARCHIVO_ZIP_INVALIDO = "documentos/archivo zip invalido para test";
 
@@ -29,18 +30,15 @@ public class LectorDeArchivosTest {
 	}
 	
 	@Test
-	public void cuandoLeoUnArchivoZipTodosLosArchivosCSVDelArchivoSonLeidos() throws ZipException, IOException{
+	public void cuandoLeoUnArchivoZipTodosLosArchivosCSVQueContieneSonLeidos() throws ZipException, IOException{
 		
 		LectorDeArchivos lectorDeArchivosZip = new LectorDeArchivos();
 		
 		ZipFile[] listaDeArchivosZipEnDirectorio = lectorDeArchivosZip.getArchivosZip(PATH_ARCHIVOS_ZIP);
 		
-		Enumeration<? extends ZipEntry> listaDeArchivosEnZip = lectorDeArchivosZip.
-				descomprimirArchivosDeZip(listaDeArchivosZipEnDirectorio[0]);
+		int cantidadDeArchivosCSVQueSeEsperaQueLea = 7;
 		
-		int cantidadDeArchivosCSVQueSeEsperaQueLea = 4;
-		
-		int cantidadDeArchivosCSVLeidos = contarArchivosCSVLeidos(lectorDeArchivosZip , listaDeArchivosEnZip);
+		int cantidadDeArchivosCSVLeidos = contarArchivosCSVLeidos(lectorDeArchivosZip , listaDeArchivosZipEnDirectorio);
 		
 		Assert.assertEquals(cantidadDeArchivosCSVQueSeEsperaQueLea, cantidadDeArchivosCSVLeidos);
 	}
@@ -52,27 +50,36 @@ public class LectorDeArchivosTest {
 		
 		ZipFile[] listaDeArchivosZipEnDirectorio = lectorDeArchivosZip.getArchivosZip(PATH_ARCHIVO_ZIP_INVALIDO);
 		
-		Enumeration<? extends ZipEntry> listaDeArchivosEnZip = lectorDeArchivosZip.
-				descomprimirArchivosDeZip(listaDeArchivosZipEnDirectorio[0]);
+		contarArchivosCSVLeidos(lectorDeArchivosZip , listaDeArchivosZipEnDirectorio);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void cuandoLeoUnDirectorioInvalidoEntoncesEsperoUnaExcepcion() throws ZipException, IOException{
 		
-		contarArchivosCSVLeidos(lectorDeArchivosZip , listaDeArchivosEnZip);
+		LectorDeArchivos lectorDeArchivos = new LectorDeArchivos();
 		
+		ZipFile[] listaDeArchivosZipEnDirectorio = lectorDeArchivos.getArchivosZip(DOCUMENTOS_ARCHIVOS_ZIP_PARA_TEST_RECORRIDOS_2010_ZIP);
+		
+		int cantidadDeArchivosZipLeidos = 3;
+		
+		Assert.assertEquals(cantidadDeArchivosZipLeidos, listaDeArchivosZipEnDirectorio.length);
 	}
 
 	private int contarArchivosCSVLeidos(LectorDeArchivos lectorDeArchivosZip ,
-			Enumeration<? extends ZipEntry> listaDeArchivosCSVEnZip) {
+			ZipFile[] listaDeArchivosZipEnDirectorio) {
 		int archivosCSVLeidos = 0;
 		
-		while(listaDeArchivosCSVEnZip.hasMoreElements()){
-			ZipEntry archivoDescomprimido = listaDeArchivosCSVEnZip.nextElement();
-			lectorDeArchivosZip.validarQueElArchivoSeaCSV(archivoDescomprimido);
-			archivosCSVLeidos++;
+		for (ZipFile archivoZip : listaDeArchivosZipEnDirectorio) {
+			Enumeration<? extends ZipEntry> listaDeArchivosEnZip = lectorDeArchivosZip.
+					leerArchivosCSVContenidosEnZip(archivoZip);
+		
+			while(listaDeArchivosEnZip.hasMoreElements()){
+				ZipEntry archivoDescomprimido = listaDeArchivosEnZip.nextElement();
+				lectorDeArchivosZip.validarQueElArchivoSeaCSV(archivoDescomprimido);
+				archivosCSVLeidos++;
+			}
 		}
 		return archivosCSVLeidos;
 	}
-	
-	
-	
-	//agregar test de validacion de que el directorio exista.
 }
 

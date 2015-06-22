@@ -2,6 +2,9 @@ package utilidades;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
@@ -11,8 +14,9 @@ public class LectorDeArchivos {
 
 	public ZipFile[] getArchivosZip(String path) throws ZipException, IOException {
 		
-		File dir = new File(path);
-		File[] listaArchivosEnDirectorio = dir.listFiles();
+		File directorio = new File(path);
+		comprobarPath(directorio.toPath());
+		File[] listaArchivosEnDirectorio = directorio.listFiles();
 		ZipFile[] archivoZip = new ZipFile[listaArchivosEnDirectorio.length];
 		
 		for(int i= 0; i< listaArchivosEnDirectorio.length ; i++){
@@ -21,7 +25,7 @@ public class LectorDeArchivos {
 		return archivoZip;
 	}
 
-	public Enumeration<? extends ZipEntry> descomprimirArchivosDeZip(ZipFile zipFile) {
+	public Enumeration<? extends ZipEntry> leerArchivosCSVContenidosEnZip(ZipFile zipFile) {
 		
 		Enumeration<? extends ZipEntry> listaDeArchivosCSVEnZip =  zipFile.entries();
 		
@@ -36,8 +40,16 @@ public class LectorDeArchivos {
 		}
 	}
 	
-	
-	
-	
-	
+	private void comprobarPath(Path path) {
+		try{
+			Boolean elDirectorioEsValido = ((Boolean) Files.getAttribute(path,
+					"basic:isDirectory", LinkOption.NOFOLLOW_LINKS));
+			if (!elDirectorioEsValido) {
+				throw new IllegalArgumentException("El Path: "+ path + " no es un directorio");
+			}
+		} catch (IOException ioe) {
+			// El directorio no existe.
+			ioe.printStackTrace();
+		}
+	}
 }
