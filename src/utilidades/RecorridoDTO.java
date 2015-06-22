@@ -2,8 +2,8 @@ package utilidades;
 
 public class RecorridoDTO {
 
-	private int idEstacionOrigen;
-	private int idEstacionDestino;
+	private Integer idEstacionOrigen;
+	private Integer idEstacionDestino;
 	
 	public RecorridoDTO (int idEstacionOrigen, int idEstacionDestino){
 		this.idEstacionDestino = idEstacionDestino;
@@ -32,8 +32,11 @@ public class RecorridoDTO {
 		return iguales;
 	}
 	
-	
-	
-}
+	public int hashCode (){
+		
+		return this.idEstacionDestino.hashCode()
+				+ this.idEstacionDestino.hashCode();
+	}
 
+}
 
