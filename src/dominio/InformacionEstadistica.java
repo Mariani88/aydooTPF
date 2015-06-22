@@ -1,9 +1,14 @@
 package dominio;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import excepciones.BicicletaMasUsadaExcepcion;
+import excepciones.BicicletaMenosUsadaExcepcion;
 import utilidades.RecorridoDTO;
 
 public class InformacionEstadistica {
@@ -17,25 +22,12 @@ public class InformacionEstadistica {
 	public InformacionEstadistica (){
 		
 		this.bicicletasMasUsadas = new HashMap <Integer, Integer> ();
+		this.bicicletasMasUsadas.put(0, 0);
 		this.bicicletasMenosUsadas = new HashMap <Integer, Integer> ();
+		this.bicicletasMenosUsadas.put(0, 2147483647);
 		this.recorridoMasRealizado = new HashMap <RecorridoDTO, Integer> ();
+		this.recorridoMasRealizado.put(new RecorridoDTO (0,0), 0);
 		this.tiempoPromedio = 0;
-	}
-
-
-	public void setBicicletasMasUsadas(Map<Integer, Integer> bicicletasMasUsadas) {
-		this.bicicletasMasUsadas = bicicletasMasUsadas;
-	}
-
-
-	public void setBicicletasMenosUsadas(Map<Integer, Integer> bicicletasMenosUsadas) {
-		this.bicicletasMenosUsadas = bicicletasMenosUsadas;
-	}
-
-
-	public void setRecorridoMasRealizado(
-			Map<RecorridoDTO, Integer> recorridoMasRealizado) {
-		this.recorridoMasRealizado = recorridoMasRealizado;
 	}
 
 
@@ -44,18 +36,58 @@ public class InformacionEstadistica {
 	}
 
 
-	public Map<Integer, Integer> getBicicletasMasUsadas() {
-		return this.bicicletasMasUsadas;
+	public void guardarBicicletasMasUsadas(int id, int cantidad) {
+		
+		Iterator<Entry<Integer, Integer>> iterador = this.bicicletasMasUsadas
+				.entrySet().iterator();
+		Entry<Integer, Integer> primerPar = iterador.next();
+		
+		if ( cantidad == primerPar.getValue() ){
+			this.bicicletasMasUsadas.put(id, cantidad);
+		
+		}else if (cantidad > primerPar.getValue() ){
+			this.bicicletasMasUsadas.clear();
+			this.bicicletasMasUsadas.put(id, cantidad);
+		}	
+		else
+			throw new BicicletaMasUsadaExcepcion ();
 	}
 
 
-	public Map<Integer, Integer> getBicicletasMenosUsadas() {
-		return this.bicicletasMenosUsadas;
+	public void guardarBicicletasMenosUsadas(int id, int cantidad) {
+		
+		Iterator<Entry<Integer, Integer>> iterador = this.bicicletasMenosUsadas
+				.entrySet().iterator();
+		Entry<Integer, Integer> primerPar = iterador.next();
+		
+		if ( cantidad == primerPar.getValue()){
+			this.bicicletasMenosUsadas.put(id, cantidad);
+			
+		}else if(cantidad < primerPar.getValue()){
+			this.bicicletasMenosUsadas.clear();
+			this.bicicletasMenosUsadas.put(id, cantidad);
+		}else{
+			throw new BicicletaMenosUsadaExcepcion ();
+		}
 	}
 
 
-	public Map<RecorridoDTO, Integer> getRecorridoMasRealizado() {
-		return this.recorridoMasRealizado;
+	public void guardarRecorridoMasRealizado(RecorridoDTO recorrido, int cantidad) {
+	
+		Iterator<Entry<RecorridoDTO, Integer>> iterador = this.recorridoMasRealizado
+				.entrySet().iterator();
+		Entry<RecorridoDTO, Integer> primerPar = iterador.next();
+		
+		if ( cantidad == primerPar.getValue()){
+			this.recorridoMasRealizado.put(recorrido, cantidad);
+			
+		}else if(cantidad > primerPar.getValue()){
+			this.recorridoMasRealizado.clear();
+			this.recorridoMasRealizado.put(recorrido, cantidad);
+		}else{
+			throw new BicicletaMenosUsadaExcepcion ();
+		}
+		
 	}
 
 

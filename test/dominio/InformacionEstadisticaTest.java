@@ -16,8 +16,8 @@ public class InformacionEstadisticaTest {
 
 		List<Integer> bicicletasMasUsadasEsperadas = new LinkedList<Integer>();
 
-		this.info.getBicicletasMasUsadas().put(3, 40);
-		this.info.getBicicletasMasUsadas().put(4, 40);
+		this.info.guardarBicicletasMasUsadas(3, 40);
+		this.info.guardarBicicletasMasUsadas(4, 40);
 
 		bicicletasMasUsadasEsperadas.add(3);
 		bicicletasMasUsadasEsperadas.add(4);
@@ -31,8 +31,8 @@ public class InformacionEstadisticaTest {
 
 		List<Integer> bicicletasMenosUsadasEsperadas = new LinkedList<Integer>();
 
-		this.info.getBicicletasMenosUsadas().put(3, 40);
-		this.info.getBicicletasMenosUsadas().put(4, 40);
+		this.info.guardarBicicletasMenosUsadas(3, 40);
+		this.info.guardarBicicletasMenosUsadas(4, 40);
 
 		bicicletasMenosUsadasEsperadas.add(3);
 		bicicletasMenosUsadasEsperadas.add(4);
@@ -46,8 +46,8 @@ public class InformacionEstadisticaTest {
 
 		List<RecorridoDTO> recorridosMasRealizados = new LinkedList<RecorridoDTO>();
 
-		this.info.getRecorridoMasRealizado().put(new RecorridoDTO(1, 1), 50);
-		this.info.getRecorridoMasRealizado().put(new RecorridoDTO(1, 2), 50);
+		this.info.guardarRecorridoMasRealizado(new RecorridoDTO(1, 1), 50);
+		this.info.guardarRecorridoMasRealizado(new RecorridoDTO(1, 2), 50);
 
 		recorridosMasRealizados.add(new RecorridoDTO(1, 1));
 		recorridosMasRealizados.add(new RecorridoDTO(1, 2));
