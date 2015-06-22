@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import excepciones.BicicletaMasUsadaExcepcion;
 import excepciones.BicicletaMenosUsadaExcepcion;
 import excepciones.RecorridoMasRealizadoExcepcion;
@@ -88,7 +87,6 @@ public class InformacionEstadistica {
 		}else{
 			throw new RecorridoMasRealizadoExcepcion ();
 		}
-		
 	}
 
 

@@ -37,6 +37,4 @@ public class RecorridoDTO {
 		return this.idEstacionDestino.hashCode()
 				+ this.idEstacionDestino.hashCode();
 	}
-
 }
-
