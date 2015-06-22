@@ -1,12 +1,9 @@
 package dominio;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
 import utilidades.RecorridoDTO;
 
 public class InformacionEstadistica {
@@ -76,11 +73,20 @@ public class InformacionEstadistica {
 	}
 
 
-	public Object bicicletasMenosUsadas() {
+	public List <Integer> bicicletasMenosUsadas() {
 		
 		List <Integer> bicicletas = new LinkedList <Integer> ();
 		bicicletas.addAll(this.bicicletasMenosUsadas.keySet());
 		
 		return bicicletas;
+	}
+
+
+	public List <RecorridoDTO> recorridosMasRealizados() {
+		
+		List <RecorridoDTO> recorridosMasRealizados = new LinkedList <RecorridoDTO>();
+		recorridosMasRealizados.addAll(this.recorridoMasRealizado.keySet());
+		
+		return recorridosMasRealizados;
 	}	
 }
