@@ -2,9 +2,12 @@ package dominio;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
+import excepciones.BicicletaMasUsadaExcepcion;
+import excepciones.BicicletaMenosUsadaExcepcion;
 import utilidades.RecorridoDTO;
 
 public class InformacionEstadisticaTest {
@@ -56,8 +59,17 @@ public class InformacionEstadisticaTest {
 				this.info.recorridosMasRealizados());		
 	}
 	
+	@Test(expected=BicicletaMasUsadaExcepcion.class)
+	public void excepcionSiSeIntentaGuardarBicicletaConMenorUsoAlMaximo (){
+		this.info.guardarBicicletasMasUsadas(2, 1);
+		this.info.guardarBicicletasMasUsadas(3, 0);
+	}
 	
-	
+	/*@Test(expected=BicicletaMenosUsadaExcepcion.class)
+	public void excepcionSiSeIntentaGuardarBicicletaConMasUsoAlMinimo (){
+		this.info.guardarBicicletasMenosUsadas(2, 1);
+		this.info.guardarBicicletasMenosUsadas(3, 2);
+	}*/
 	
 	
 }
