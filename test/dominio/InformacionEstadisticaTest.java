@@ -22,10 +22,15 @@ public class InformacionEstadisticaTest {
 
 		this.info.guardarBicicletasMasUsadas(3, 40);
 		this.info.guardarBicicletasMasUsadas(4, 40);
-
 		bicicletasMasUsadasEsperadas.add(3);
 		bicicletasMasUsadasEsperadas.add(4);
 
+		Assert.assertEquals(bicicletasMasUsadasEsperadas,
+				this.info.bicicletasMasUsadas());
+		
+		this.info.guardarBicicletasMasUsadas(1, 1000);
+		bicicletasMasUsadasEsperadas.clear();
+		bicicletasMasUsadasEsperadas.add(1);
 		Assert.assertEquals(bicicletasMasUsadasEsperadas,
 				this.info.bicicletasMasUsadas());
 	}
@@ -37,10 +42,15 @@ public class InformacionEstadisticaTest {
 
 		this.info.guardarBicicletasMenosUsadas(3, 40);
 		this.info.guardarBicicletasMenosUsadas(4, 40);
-
 		bicicletasMenosUsadasEsperadas.add(3);
 		bicicletasMenosUsadasEsperadas.add(4);
 
+		Assert.assertEquals(bicicletasMenosUsadasEsperadas,
+				this.info.bicicletasMenosUsadas());
+		
+		this.info.guardarBicicletasMenosUsadas(1, 10);
+		bicicletasMenosUsadasEsperadas.clear();
+		bicicletasMenosUsadasEsperadas.add(1);
 		Assert.assertEquals(bicicletasMenosUsadasEsperadas,
 				this.info.bicicletasMenosUsadas());
 	}
@@ -57,7 +67,14 @@ public class InformacionEstadisticaTest {
 		recorridosMasRealizados.add(new RecorridoDTO(1, 2));
 		
 		Assert.assertEquals(recorridosMasRealizados,
-				this.info.recorridosMasRealizados());		
+				this.info.recorridosMasRealizados());	
+		
+		this.info.guardarRecorridoMasRealizado(new RecorridoDTO(10, 10), 100);
+		recorridosMasRealizados.clear();;
+		recorridosMasRealizados.add(new RecorridoDTO(10, 10));
+		
+		Assert.assertEquals(recorridosMasRealizados,
+				this.info.recorridosMasRealizados());	
 	}
 	
 	@Test(expected=BicicletaMasUsadaExcepcion.class)
