@@ -65,11 +65,11 @@ public class InformacionEstadisticaTest {
 		this.info.guardarBicicletasMasUsadas(3, 0);
 	}
 	
-	/*@Test(expected=BicicletaMenosUsadaExcepcion.class)
+	@Test(expected=BicicletaMenosUsadaExcepcion.class)
 	public void excepcionSiSeIntentaGuardarBicicletaConMasUsoAlMinimo (){
 		this.info.guardarBicicletasMenosUsadas(2, 1);
 		this.info.guardarBicicletasMenosUsadas(3, 2);
-	}*/
+	}
 	
 	
 }
