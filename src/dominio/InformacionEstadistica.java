@@ -35,40 +35,76 @@ public class InformacionEstadistica {
 		this.tiempoPromedio = tiempoPromedio;
 	}
 
-
+	/**
+	 * guarda el id de la bicicleta mas usada y su cantidad de forma arbitraria.
+	 * 
+	 * @param id
+	 * @param cantidad
+	 * @throws BicicletaMasUsadaExcepcion si cantidad no es un maximo
+	 */
 	public void guardarBicicletasMasUsadas(int id, int cantidad) {
+		
+		boolean esMaximo = this.guardarMaximoBicicleta ( id, cantidad);
+		
+		if (!esMaximo) throw new BicicletaMasUsadaExcepcion ();
+	}
+
+
+	private boolean guardarMaximoBicicleta(int id, int cantidad) {
 		
 		Iterator<Entry<Integer, Integer>> iterador = this.bicicletasMasUsadas
 				.entrySet().iterator();
 		Entry<Integer, Integer> primerPar = iterador.next();
+	
+		boolean guardado = false;
 		
 		if ( cantidad == primerPar.getValue() ){
 			this.bicicletasMasUsadas.put(id, cantidad);
-		
+			guardado = true;
+			
 		}else if (cantidad > primerPar.getValue() ){
 			this.bicicletasMasUsadas.clear();
 			this.bicicletasMasUsadas.put(id, cantidad);
+			guardado = true;
 		}	
-		else
-			throw new BicicletaMasUsadaExcepcion ();
+		return guardado;
 	}
 
 
+	/**
+	 * guarda el id de la bicicleta menos usada y su cantidad de forma arbitraria.
+	 * 
+	 * @param id
+	 * @param cantidad
+	 * @throws BicicletaMenosUsadaExcepcion si cantidad no es un minimo
+	 */
 	public void guardarBicicletasMenosUsadas(int id, int cantidad) {
+		
+		boolean esMinimo = this.guardarMinimoBicicleta (id, cantidad);
+		
+		if (!esMinimo) throw new BicicletaMenosUsadaExcepcion ();
+	
+	}
+
+
+	private boolean guardarMinimoBicicleta(int id, int cantidad) {
 		
 		Iterator<Entry<Integer, Integer>> iterador = this.bicicletasMenosUsadas
 				.entrySet().iterator();
 		Entry<Integer, Integer> primerPar = iterador.next();
 		
+		boolean guardado = false;
+		
 		if ( cantidad == primerPar.getValue()){
 			this.bicicletasMenosUsadas.put(id, cantidad);
-			
+			guardado = true;
 		}else if(cantidad < primerPar.getValue()){
 			this.bicicletasMenosUsadas.clear();
 			this.bicicletasMenosUsadas.put(id, cantidad);
-		}else{
-			throw new BicicletaMenosUsadaExcepcion ();
+			guardado = true;
 		}
+		
+		return guardado;
 	}
 
 
@@ -119,5 +155,18 @@ public class InformacionEstadistica {
 		recorridosMasRealizados.addAll(this.recorridoMasRealizado.keySet());
 		
 		return recorridosMasRealizados;
+	}
+
+
+	public void evaluarDatoBicicleta(int id, int cantidad) {
+		
+		this.guardarMaximoBicicleta(id, cantidad);
+		
 	}	
+	
+	
+	
+	
+	
+	
 }

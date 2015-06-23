@@ -96,13 +96,14 @@ public class InformacionEstadisticaTest {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Test
+	public void evaluarDatoBicicletaDebeGuardarDatoSiEsMaximo (){
+		
+		this.info.guardarBicicletasMasUsadas(3, 100);
+		List <Integer> bicicletasEsperadas = new LinkedList <Integer>();
+		this.info.evaluarDatoBicicleta (9,200);
+		bicicletasEsperadas.add(9);
+		
+		Assert.assertEquals(bicicletasEsperadas, this.info.bicicletasMasUsadas());
+	}
 }
