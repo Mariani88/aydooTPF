@@ -161,7 +161,7 @@ public class InformacionEstadistica {
 	public void evaluarDatoBicicleta(int id, int cantidad) {
 		
 		this.guardarMaximoBicicleta(id, cantidad);
-		
+		this.guardarMinimoBicicleta(id, cantidad);
 	}	
 	
 	
