@@ -179,10 +179,4 @@ public class InformacionEstadistica {
 	public void evaluarRecorrido(RecorridoDTO recorrido, int cantidad) {
 		this.guardarMaximoRecorrido(recorrido, cantidad);
 	}	
-	
-	
-	
-	
-	
-	
 }

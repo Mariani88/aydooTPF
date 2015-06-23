@@ -17,4 +17,24 @@ public class Bicicleta {
 	public int getId() {
 		return this.id;
 	}	
+	
+	
+	public boolean equals (Object obj){
+		
+		boolean iguales = this == obj;
+		
+		if (!iguales && obj !=null && obj instanceof Bicicleta){
+			
+			Bicicleta obje = (Bicicleta)obj;
+			iguales = this.id == obje.getId();
+		}		
+		
+		return iguales;
+	}
+	
+	
+	public int hashCode (){	
+		Integer entero = new Integer (this.id);
+		return entero.hashCode();
+	}
 }
