@@ -100,7 +100,7 @@ public class InformacionEstadisticaTest {
 		
 		this.info.guardarBicicletasMasUsadas(3, 100);
 		List <Integer> bicicletasEsperadas = new LinkedList <Integer>();
-		this.info.evaluarDatoBicicleta (9,200);
+		this.info.evaluarUsoBicicleta (9,200);
 		bicicletasEsperadas.add(9);
 		
 		Assert.assertEquals(bicicletasEsperadas, this.info.bicicletasMasUsadas());
@@ -110,9 +110,21 @@ public class InformacionEstadisticaTest {
 	public void evaluarDatoBicicletaDebeGuardarDatoSiEsMinimo (){
 		this.info.guardarBicicletasMenosUsadas(3, 100);
 		List <Integer> bicicletasEsperadas = new LinkedList <Integer>();
-		this.info.evaluarDatoBicicleta (9,10);
+		this.info.evaluarUsoBicicleta (9,10);
 		bicicletasEsperadas.add(9);
 		
 		Assert.assertEquals(bicicletasEsperadas, this.info.bicicletasMenosUsadas());
+	}
+	
+	@Test
+	public void evaluarDatoDebeGuardarDatoSiRecorridoEsMaximo (){
+		
+		this.info.guardarRecorridoMasRealizado(new RecorridoDTO (1,1),200);
+		
+		List<RecorridoDTO> recorridosEsperados = new LinkedList<RecorridoDTO> ();
+		recorridosEsperados.add(new RecorridoDTO (2,2));
+		this.info.evaluarRecorrido(new RecorridoDTO (2,2), 3000);
+		
+		Assert.assertEquals(recorridosEsperados, this.info.recorridosMasRealizados());	
 	}
 }

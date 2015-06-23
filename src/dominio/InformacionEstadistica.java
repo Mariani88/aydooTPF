@@ -110,19 +110,30 @@ public class InformacionEstadistica {
 
 	public void guardarRecorridoMasRealizado(RecorridoDTO recorrido, int cantidad) {
 	
+		boolean esMaximo = this.guardarMaximoRecorrido (recorrido, cantidad);
+		
+		if (!esMaximo) throw new RecorridoMasRealizadoExcepcion ();
+	}
+
+
+	private boolean guardarMaximoRecorrido(RecorridoDTO recorrido, int cantidad) {
+		
+		boolean guardado = false;
+		
 		Iterator<Entry<RecorridoDTO, Integer>> iterador = this.recorridoMasRealizado
 				.entrySet().iterator();
 		Entry<RecorridoDTO, Integer> primerPar = iterador.next();
 		
 		if ( cantidad == primerPar.getValue()){
 			this.recorridoMasRealizado.put(recorrido, cantidad);
-			
+			guardado = true;
 		}else if(cantidad > primerPar.getValue()){
 			this.recorridoMasRealizado.clear();
 			this.recorridoMasRealizado.put(recorrido, cantidad);
-		}else{
-			throw new RecorridoMasRealizadoExcepcion ();
+			guardado = true;
 		}
+		
+		return guardado;
 	}
 
 
@@ -158,10 +169,15 @@ public class InformacionEstadistica {
 	}
 
 
-	public void evaluarDatoBicicleta(int id, int cantidad) {
+	public void evaluarUsoBicicleta(int id, int cantidad) {
 		
 		this.guardarMaximoBicicleta(id, cantidad);
 		this.guardarMinimoBicicleta(id, cantidad);
+	}
+
+
+	public void evaluarRecorrido(RecorridoDTO recorrido, int cantidad) {
+		this.guardarMaximoRecorrido(recorrido, cantidad);
 	}	
 	
 	
