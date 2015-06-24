@@ -1,6 +1,7 @@
 package utilidades;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,21 @@ public class GeneradorDeEstadistica {
 
 	public void generarEstadistica(List<Bicicleta> bicicletas) {
 		
+		Iterator <Bicicleta> iterador = bicicletas.iterator();
 		
+		while (iterador.hasNext()) {
+
+			Bicicleta bicicleta = iterador.next();
+
+			if (this.historialUsoDeBicicletas.containsKey(bicicleta.getId())) {		
+				int uso = this.historialUsoDeBicicletas.get(bicicleta.getId());
+				this.historialUsoDeBicicletas.put(bicicleta.getId(), uso + 1);
+				this.estadistica.evaluarUsoBicicleta(bicicleta.getId(), uso + 1);
+			}else{
+				this.historialUsoDeBicicletas.put(bicicleta.getId(), 1);
+				this.estadistica.evaluarUsoBicicleta(bicicleta.getId(), 1);
+			}
+		}	
 	}
 
 	public InformacionEstadistica terminar() {
