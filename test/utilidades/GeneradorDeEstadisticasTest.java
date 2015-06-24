@@ -28,10 +28,9 @@ public class GeneradorDeEstadisticasTest {
 
 		return estaciones;
 	}
-
-	@Before
-	public void cargarDatos() {
-
+	
+	public void cargarRecorridos (){
+		
 		List<Estacion> estaciones = this.cargarEstaciones();
 
 		this.recorridos.add( new Recorrido(estaciones.get(0),
@@ -40,7 +39,16 @@ public class GeneradorDeEstadisticasTest {
 				estaciones.get(3)) );
 		this.recorridos.add( new Recorrido(estaciones.get(4),
 				estaciones.get(5)) );
+		
+		this.recorridos.get(0).setMinutosRecorridos(11);;
+		this.recorridos.get(1).setMinutosRecorridos(20);;
+		this.recorridos.get(2).setMinutosRecorridos(10);;
+	}
 
+	@Before
+	public void cargarDatos() {
+
+		this.cargarRecorridos();
 		this.bicicletas.add(new Bicicleta(1, this.recorridos.get(0)));
 		this.bicicletas.add(new Bicicleta(3, this.recorridos.get(1)));
 		this.bicicletas.add(new Bicicleta(3, this.recorridos.get(0)));
@@ -96,6 +104,13 @@ public class GeneradorDeEstadisticasTest {
 	}
 	
 	
-	
-	
+	@Test
+	public void generarEstadisticasDebeObtenerPromedioDeUsoDeBicicletas(){
+		
+		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
+		generador.generarEstadistica(this.bicicletas);
+		
+		int tiempoPromedio = 14;		
+		Assert.assertEquals(tiempoPromedio, generador.terminar().getTiempoPromedio());
+	}	
 }
