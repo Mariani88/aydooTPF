@@ -22,6 +22,4 @@ public class RecorridoDTOTest {
 		
 		Assert.assertFalse (recorrido.equals(recorrido1));
 	}
-	
-	
 }
