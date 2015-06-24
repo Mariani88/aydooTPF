@@ -22,12 +22,12 @@ public class InformacionEstadistica {
 	public InformacionEstadistica (){
 		
 		this.bicicletasMasUsadas = new HashMap <Integer, Integer> ();
-		this.bicicletasMasUsadas.put(0, 0);
+		this.bicicletasMasUsadas.put(-1, 0);
 		this.bicicletasMenosUsadas = new HashMap <Integer, Integer> ();
-		this.bicicletasMenosUsadas.put(0, 2147483647);
+		this.bicicletasMenosUsadas.put(-1, 2147483647);
 		this.recorridoMasRealizado = new HashMap <RecorridoDTO, Integer> ();
 		this.recorridoMasRealizado.put(new RecorridoDTO (0,0), 0);
-		this.tiempoPromedio = 0;
+		this.tiempoPromedio = -1;
 	}
 
 

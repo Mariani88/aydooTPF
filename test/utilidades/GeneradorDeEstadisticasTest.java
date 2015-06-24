@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import dominio.Bicicleta;
 import dominio.Estacion;
+import dominio.InformacionEstadistica;
 import dominio.Recorrido;
 
 public class GeneradorDeEstadisticasTest {
@@ -40,9 +41,9 @@ public class GeneradorDeEstadisticasTest {
 		this.recorridos.add( new Recorrido(estaciones.get(4),
 				estaciones.get(5)) );
 		
-		this.recorridos.get(0).setMinutosRecorridos(11);;
-		this.recorridos.get(1).setMinutosRecorridos(20);;
-		this.recorridos.get(2).setMinutosRecorridos(10);;
+		this.recorridos.get(0).setMinutosRecorridos(11);
+		this.recorridos.get(1).setMinutosRecorridos(20);
+		this.recorridos.get(2).setMinutosRecorridos(10);
 	}
 
 	@Before
@@ -91,13 +92,8 @@ public class GeneradorDeEstadisticasTest {
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
 		List<RecorridoDTO> recorridosEsperados = new LinkedList<RecorridoDTO>();
 		
-		int origen = this.recorridos.get(0).getEstacionOrigen().getId();
-		int destino = this.recorridos.get(0).getEstacionDestino().getId();
-		recorridosEsperados.add(new RecorridoDTO( origen, destino));
-		
-		origen = this.recorridos.get(1).getEstacionOrigen().getId();
-		destino = this.recorridos.get(1).getEstacionDestino().getId();
-		recorridosEsperados.add(new RecorridoDTO (origen, destino));
+		recorridosEsperados.add(Recorrido.parsearADTO(this.recorridos.get(0)));
+		recorridosEsperados.add(Recorrido.parsearADTO(this.recorridos.get(1)));
 		
 		generador.generarEstadistica(this.bicicletas);
 		Assert.assertEquals(recorridosEsperados, generador.terminar().recorridosMasRealizados());
@@ -113,4 +109,54 @@ public class GeneradorDeEstadisticasTest {
 		int tiempoPromedio = 14;		
 		Assert.assertEquals(tiempoPromedio, generador.terminar().getTiempoPromedio());
 	}	
+	
+	
+	@Test
+	public void terminarDebeDevolverInformacionYReiniciarParametros (){
+		
+		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
+		generador.generarEstadistica(this.bicicletas);
+
+		List<Integer> idBicicletaInicializado = new LinkedList<Integer>();
+		idBicicletaInicializado.add(-1);
+
+		List<RecorridoDTO> idRecorridoInicializado = new LinkedList<RecorridoDTO>();
+		idRecorridoInicializado.add(new RecorridoDTO(0, 0));
+
+		generador.terminar();
+		InformacionEstadistica infoReiniciada= generador.terminar();
+		
+		Assert.assertEquals(idBicicletaInicializado, infoReiniciada.bicicletasMasUsadas());
+		Assert.assertEquals(idBicicletaInicializado, infoReiniciada.bicicletasMenosUsadas());
+		Assert.assertEquals(idRecorridoInicializado, infoReiniciada.recorridosMasRealizados());
+	}
+	
+	
+	@Test
+	public void terminarDebeReiniciarParametrosDeCalculo (){
+		
+		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
+		generador.generarEstadistica(this.bicicletas);
+		generador.terminar();
+		generador.generarEstadistica(this.bicicletas);
+		InformacionEstadistica info = generador.terminar();
+		
+		List<Integer> idBicicletasMasUsadas = new LinkedList<Integer>();
+		idBicicletasMasUsadas.add(1);
+		idBicicletasMasUsadas.add(3);
+		
+		List <Integer> idBicicletasMenosUsadas = new LinkedList <Integer> ();
+		idBicicletasMenosUsadas.add(9);
+		
+		List<RecorridoDTO> recorridosEsperados = new LinkedList<RecorridoDTO>();
+		recorridosEsperados.add(Recorrido.parsearADTO(this.recorridos.get(0)));
+		recorridosEsperados.add(Recorrido.parsearADTO(this.recorridos.get(1)));
+		
+		int tiempoPromedio = 14;		
+		
+		Assert.assertEquals(idBicicletasMasUsadas, info.bicicletasMasUsadas());
+		Assert.assertEquals(idBicicletasMenosUsadas, info.bicicletasMenosUsadas());
+		Assert.assertEquals(recorridosEsperados, info.recorridosMasRealizados());
+		Assert.assertEquals(tiempoPromedio, info.getTiempoPromedio());
+	}
 }

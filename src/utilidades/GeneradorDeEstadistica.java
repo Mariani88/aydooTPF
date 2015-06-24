@@ -77,6 +77,13 @@ public class GeneradorDeEstadistica {
 
 	public InformacionEstadistica terminar() {
 
-		return this.estadistica;
+		InformacionEstadistica info = this.estadistica;
+		this.estadistica = new InformacionEstadistica ();
+		this.bicicletasProcesadas = 0;
+		this.tiempoTotal = 0;
+		this.historialUsoDeBicicletas = new HashMap<Integer, Integer>();
+		this.historialUsoDeRecorridos = new HashMap<RecorridoDTO, Integer>();
+		
+		return info;
 	}
 }
