@@ -2,6 +2,8 @@ package dominio;
 
 import java.util.Date;
 
+import utilidades.RecorridoDTO;
+
 public class Recorrido {
 
 	private Date fechaOrigen;
@@ -46,5 +48,13 @@ public class Recorrido {
 
 	public Estacion getEstacionDestino() {
 		return this.estacionDestino;
+	}
+
+	public static RecorridoDTO parsearADTO(Recorrido recorrido) {
+		
+		int origen = recorrido.getEstacionOrigen().getId();
+		int destino = recorrido.getEstacionDestino().getId();
+		
+		return new RecorridoDTO (origen, destino);
 	}
 }

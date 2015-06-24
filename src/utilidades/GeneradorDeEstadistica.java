@@ -7,6 +7,7 @@ import java.util.Map;
 
 import dominio.Bicicleta;
 import dominio.InformacionEstadistica;
+import dominio.Recorrido;
 
 public class GeneradorDeEstadistica {
 
@@ -40,18 +41,17 @@ public class GeneradorDeEstadistica {
 
 			Bicicleta bicicleta = iterador.next();
 			this.almacenarHistorialDeUsoYEvaluar(bicicleta);
+			this.almacenarHistorialDeRecorridosYEvaluar (bicicleta.getRecorrido());
 		}	
+	}
+
+	private void almacenarHistorialDeRecorridosYEvaluar(Recorrido recorrido) {
+		
+		
 	}
 
 	public InformacionEstadistica terminar() {
 		
 		return this.estadistica;
 	}
-	
-	
-	
-	
-	
-	
-	
 }
