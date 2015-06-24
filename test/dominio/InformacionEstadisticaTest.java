@@ -116,6 +116,24 @@ public class InformacionEstadisticaTest {
 		Assert.assertEquals(bicicletasEsperadas, this.info.bicicletasMenosUsadas());
 	}
 	
+	
+	@Test
+	public void evaluarDatoBicicletaDebeGuardarMinimoYRemoverViejosMinimos() {
+
+		List<Integer> bicicletasEsperadas = new LinkedList<Integer>();
+		this.info.evaluarUsoBicicleta(1, 1);
+		this.info.evaluarUsoBicicleta(3, 1);
+		this.info.evaluarUsoBicicleta(3, 2);
+		this.info.evaluarUsoBicicleta(9, 1);
+		this.info.evaluarUsoBicicleta(1, 2);
+		this.info.evaluarUsoBicicleta(1, 3);
+		this.info.evaluarUsoBicicleta(3, 3);
+		bicicletasEsperadas.add(9);
+
+		Assert.assertEquals(bicicletasEsperadas,
+				this.info.bicicletasMenosUsadas());
+	}
+	
 	@Test
 	public void evaluarDatoDebeGuardarDatoSiRecorridoEsMaximo (){
 		

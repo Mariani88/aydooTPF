@@ -20,6 +20,18 @@ public class GeneradorDeEstadistica {
 		this.estadistica = new InformacionEstadistica ();
 	}
 
+	private void almacenarHistorialDeUsoYEvaluar (Bicicleta bicicleta){
+		
+		if (this.historialUsoDeBicicletas.containsKey(bicicleta.getId())) {		
+			int uso = this.historialUsoDeBicicletas.get(bicicleta.getId());
+			this.historialUsoDeBicicletas.put(bicicleta.getId(), uso + 1);
+			this.estadistica.evaluarUsoBicicleta(bicicleta.getId(), uso + 1);
+		}else{
+			this.historialUsoDeBicicletas.put(bicicleta.getId(), 1);
+			this.estadistica.evaluarUsoBicicleta(bicicleta.getId(), 1);
+		}
+	}
+	
 	public void generarEstadistica(List<Bicicleta> bicicletas) {
 		
 		Iterator <Bicicleta> iterador = bicicletas.iterator();
@@ -27,15 +39,7 @@ public class GeneradorDeEstadistica {
 		while (iterador.hasNext()) {
 
 			Bicicleta bicicleta = iterador.next();
-
-			if (this.historialUsoDeBicicletas.containsKey(bicicleta.getId())) {		
-				int uso = this.historialUsoDeBicicletas.get(bicicleta.getId());
-				this.historialUsoDeBicicletas.put(bicicleta.getId(), uso + 1);
-				this.estadistica.evaluarUsoBicicleta(bicicleta.getId(), uso + 1);
-			}else{
-				this.historialUsoDeBicicletas.put(bicicleta.getId(), 1);
-				this.estadistica.evaluarUsoBicicleta(bicicleta.getId(), 1);
-			}
+			this.almacenarHistorialDeUsoYEvaluar(bicicleta);
 		}	
 	}
 

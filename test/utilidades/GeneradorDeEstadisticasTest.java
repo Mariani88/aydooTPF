@@ -62,4 +62,17 @@ public class GeneradorDeEstadisticasTest {
 		Assert.assertEquals(idBicicletasMasUsadas, generador.terminar()
 				.bicicletasMasUsadas());
 	}
+	
+	/*@Test
+	public void generarEstadisticasDebeObtenerBicicletaMenosUsada() {
+		
+		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
+		List<Integer> idBicicletasMenosUsadas = new LinkedList<Integer>();
+		idBicicletasMenosUsadas.add(9);
+		
+		generador.generarEstadistica(this.bicicletas);
+
+		Assert.assertEquals(idBicicletasMenosUsadas, generador.terminar()
+				.bicicletasMenosUsadas());
+	}*/
 }

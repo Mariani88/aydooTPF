@@ -170,13 +170,26 @@ public class InformacionEstadistica {
 
 
 	public void evaluarUsoBicicleta(int id, int cantidad) {
-		
-		this.guardarMaximoBicicleta(id, cantidad);
-		this.guardarMinimoBicicleta(id, cantidad);
-	}
 
+		this.guardarMaximoBicicleta(id, cantidad);
+
+		boolean existe = this.bicicletasMenosUsadas.containsKey(id);
+		boolean hayOtroId = this.bicicletasMenosUsadas.size() > 0;
+
+		if (existe && hayOtroId) {
+			
+			this.bicicletasMenosUsadas.remove(id);
+			
+		} else if (!existe && !hayOtroId) {
+			
+			this.bicicletasMenosUsadas.put(id, cantidad);
+			
+		} else
+			
+			this.guardarMinimoBicicleta(id, cantidad);
+	}
 
 	public void evaluarRecorrido(RecorridoDTO recorrido, int cantidad) {
 		this.guardarMaximoRecorrido(recorrido, cantidad);
-	}	
+	}
 }
