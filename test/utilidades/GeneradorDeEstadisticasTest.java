@@ -28,7 +28,7 @@ public class GeneradorDeEstadisticasTest {
 		return estaciones;
 	}
 
-	@Before
+	
 	public void cargarDatos() {
 
 		List<Estacion> estaciones = this.cargarEstaciones();
@@ -49,10 +49,12 @@ public class GeneradorDeEstadisticasTest {
 		this.bicicletas.add(new Bicicleta(3, recorrido2));
 	}
 
-	/*@Test
+	@Test
 	public void generarEstadisticasDebeObtenerBicicletaMasUsada() {
-
-		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
+		
+		this.cargarDatos();
+		
+		/*GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
 		List<Integer> idBicicletasMasUsadas = new LinkedList<Integer>();
 		idBicicletasMasUsadas.add(1);
 		idBicicletasMasUsadas.add(3);
@@ -60,7 +62,7 @@ public class GeneradorDeEstadisticasTest {
 		generador.generarEstadistica(this.bicicletas);
 
 		Assert.assertEquals(idBicicletasMasUsadas, generador.terminar()
-				.bicicletasMasUsadas());
-	}*/
+				.bicicletasMasUsadas());*/
+	}
 	
 }
