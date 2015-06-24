@@ -50,6 +50,22 @@ public class Recorrido {
 		return this.estacionDestino;
 	}
 
+	public boolean equals(Object obj) {
+
+		boolean iguales = this == obj;
+
+		if (!iguales && obj != null && obj instanceof Recorrido) {
+			Recorrido obje = (Recorrido) obj;
+
+			iguales = this.estacionOrigen.equals(obje.getEstacionOrigen())
+					&& this.estacionDestino.equals(obje.getEstacionDestino());
+		}
+
+		return iguales;
+	}
+	
+	
+	
 	public static RecorridoDTO parsearADTO(Recorrido recorrido) {
 		
 		int origen = recorrido.getEstacionOrigen().getId();
@@ -57,4 +73,9 @@ public class Recorrido {
 		
 		return new RecorridoDTO (origen, destino);
 	}
+	
+	
+	
+	
+	
 }
