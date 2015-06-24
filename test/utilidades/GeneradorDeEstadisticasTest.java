@@ -77,7 +77,7 @@ public class GeneradorDeEstadisticasTest {
 				.bicicletasMenosUsadas());
 	}
 	
-	/*@Test
+	@Test
 	public void generarEstadisticasDebeObtenerRecorridoMasRealizado(){
 		
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
@@ -93,7 +93,7 @@ public class GeneradorDeEstadisticasTest {
 		
 		generador.generarEstadistica(this.bicicletas);
 		Assert.assertEquals(recorridosEsperados, generador.terminar().recorridosMasRealizados());
-	}*/
+	}
 	
 	
 	

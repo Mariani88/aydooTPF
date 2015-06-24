@@ -47,6 +47,16 @@ public class GeneradorDeEstadistica {
 
 	private void almacenarHistorialDeRecorridosYEvaluar(Recorrido recorrido) {
 		
+		RecorridoDTO recorridoDTO = Recorrido.parsearADTO(recorrido);
+		
+		if (this.historialUsoDeRecorridos.containsKey(recorridoDTO)) {		
+			int uso = this.historialUsoDeRecorridos.get(recorridoDTO);
+			this.historialUsoDeRecorridos.put(recorridoDTO, uso + 1);
+			this.estadistica.evaluarRecorrido(recorridoDTO, uso + 1);
+		}else{
+			this.historialUsoDeRecorridos.put(recorridoDTO, 1);
+			this.estadistica.evaluarRecorrido(recorridoDTO, 1);
+		}
 		
 	}
 
