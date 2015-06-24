@@ -74,8 +74,8 @@ public class Recorrido {
 		return new RecorridoDTO (origen, destino);
 	}
 	
-	
-	
-	
-	
+	public int hashCode (){
+		
+		return this.estacionOrigen.hashCode();
+	}
 }
