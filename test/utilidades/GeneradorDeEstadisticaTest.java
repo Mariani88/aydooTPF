@@ -3,7 +3,7 @@ package utilidades;
 import java.util.LinkedList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import dominio.Bicicleta;
 import dominio.Estacion;
@@ -12,11 +12,11 @@ import dominio.Recorrido;
 
 public class GeneradorDeEstadisticaTest {
 
-	private static List<Bicicleta> bicicletas = new LinkedList<Bicicleta>();
-	private static List<Recorrido> recorridos = new LinkedList<Recorrido>();
+	private List<Bicicleta> bicicletas = new LinkedList<Bicicleta>();
+	private List<Recorrido> recorridos = new LinkedList<Recorrido>();
 	
 	
-	public static List<Estacion> cargarEstaciones() {
+	public List<Estacion> cargarEstaciones() {
 
 		List<Estacion> estaciones = new LinkedList<Estacion>();
 		estaciones.add(new Estacion(20, "O"));
@@ -29,9 +29,10 @@ public class GeneradorDeEstadisticaTest {
 		return estaciones;
 	}
 	
-	public static void cargarRecorridos (){
+	
+	public void cargarRecorridos (){
 		
-		List<Estacion> estaciones = cargarEstaciones();
+		List<Estacion> estaciones = this.cargarEstaciones();
 
 		recorridos.add( new Recorrido(estaciones.get(0),
 				estaciones.get(1)) );
@@ -45,10 +46,10 @@ public class GeneradorDeEstadisticaTest {
 		recorridos.get(2).setMinutosRecorridos(10);
 	}
 
-	@BeforeClass
-	public static void cargarDatos() {
+	@Before
+	public void cargarDatos() {
 
-		cargarRecorridos();
+		this.cargarRecorridos();
 		bicicletas.add(new Bicicleta(1, recorridos.get(0)));
 		bicicletas.add(new Bicicleta(3, recorridos.get(1)));
 		bicicletas.add(new Bicicleta(3, recorridos.get(0)));
@@ -101,7 +102,6 @@ public class GeneradorDeEstadisticaTest {
 	
 	@Test
 	public void generarEstadisticasDebeObtenerPromedioDeUsoDeBicicletas(){
-		
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
 		generador.generarEstadistica(bicicletas);
 		
