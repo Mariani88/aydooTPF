@@ -46,7 +46,6 @@ public class GeneradorDeEstadisticaTest {
 		recorridos.get(2).setMinutosRecorridos(10);
 	}
 
-	@Before
 	public void cargarDatos() {
 
 		this.cargarRecorridos();
@@ -61,7 +60,7 @@ public class GeneradorDeEstadisticaTest {
 
 	@Test
 	public void generarEstadisticasDebeObtenerBicicletaMasUsada() {
-		
+		this.cargarDatos();
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
 		List<Integer> idBicicletasMasUsadas = new LinkedList<Integer>();
 		idBicicletasMasUsadas.add(1);
@@ -75,7 +74,7 @@ public class GeneradorDeEstadisticaTest {
 	
 	@Test
 	public void generarEstadisticasDebeObtenerBicicletaMenosUsada() {
-		
+		this.cargarDatos();
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
 		List<Integer> idBicicletasMenosUsadas = new LinkedList<Integer>();
 		idBicicletasMenosUsadas.add(9);
@@ -88,7 +87,7 @@ public class GeneradorDeEstadisticaTest {
 	
 	@Test
 	public void generarEstadisticasDebeObtenerRecorridoMasRealizado(){
-		
+		this.cargarDatos();
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
 		List<RecorridoDTO> recorridosEsperados = new LinkedList<RecorridoDTO>();
 		
@@ -102,6 +101,7 @@ public class GeneradorDeEstadisticaTest {
 	
 	@Test
 	public void generarEstadisticasDebeObtenerPromedioDeUsoDeBicicletas(){
+		this.cargarDatos();
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
 		generador.generarEstadistica(bicicletas);
 		
@@ -112,7 +112,7 @@ public class GeneradorDeEstadisticaTest {
 	
 	@Test
 	public void terminarDebeDevolverInformacionYReiniciarParametros (){
-		
+		this.cargarDatos();
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
 		generador.generarEstadistica(bicicletas);
 
@@ -133,7 +133,7 @@ public class GeneradorDeEstadisticaTest {
 	
 	@Test
 	public void terminarDebeReiniciarParametrosDeCalculo (){
-		
+		this.cargarDatos();
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
 		generador.generarEstadistica(bicicletas);
 		generador.terminar();
