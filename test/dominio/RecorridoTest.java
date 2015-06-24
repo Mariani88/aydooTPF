@@ -39,6 +39,5 @@ public class RecorridoTest {
 		RecorridoDTO recorridoDTO = new RecorridoDTO (estacion1.getId(), estacion2.getId());
 		
 		Assert.assertEquals(recorridoDTO, Recorrido.parsearADTO(recorrido));
-	}
-	
+	}	
 }

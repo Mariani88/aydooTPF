@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import dominio.Bicicleta;
@@ -14,10 +15,10 @@ import dominio.Recorrido;
 
 public class GeneradorDeEstadisticasTest {
 
-	private List<Bicicleta> bicicletas = new LinkedList<Bicicleta>();
-	private List<Recorrido> recorridos = new LinkedList<Recorrido>();
+	private static List<Bicicleta> bicicletas = new LinkedList<Bicicleta>();
+	private static List<Recorrido> recorridos = new LinkedList<Recorrido>();
 	
-	public List<Estacion> cargarEstaciones() {
+	public static List<Estacion> cargarEstaciones() {
 
 		List<Estacion> estaciones = new LinkedList<Estacion>();
 		estaciones.add(new Estacion(20, "O"));
@@ -30,33 +31,33 @@ public class GeneradorDeEstadisticasTest {
 		return estaciones;
 	}
 	
-	public void cargarRecorridos (){
+	public static void cargarRecorridos (){
 		
-		List<Estacion> estaciones = this.cargarEstaciones();
+		List<Estacion> estaciones = cargarEstaciones();
 
-		this.recorridos.add( new Recorrido(estaciones.get(0),
+		recorridos.add( new Recorrido(estaciones.get(0),
 				estaciones.get(1)) );
-		this.recorridos.add( new Recorrido(estaciones.get(2),
+		recorridos.add( new Recorrido(estaciones.get(2),
 				estaciones.get(3)) );
-		this.recorridos.add( new Recorrido(estaciones.get(4),
+		recorridos.add( new Recorrido(estaciones.get(4),
 				estaciones.get(5)) );
 		
-		this.recorridos.get(0).setMinutosRecorridos(11);
-		this.recorridos.get(1).setMinutosRecorridos(20);
-		this.recorridos.get(2).setMinutosRecorridos(10);
+		recorridos.get(0).setMinutosRecorridos(11);
+		recorridos.get(1).setMinutosRecorridos(20);
+		recorridos.get(2).setMinutosRecorridos(10);
 	}
 
-	@Before
-	public void cargarDatos() {
+	@BeforeClass
+	public static void cargarDatos() {
 
-		this.cargarRecorridos();
-		this.bicicletas.add(new Bicicleta(1, this.recorridos.get(0)));
-		this.bicicletas.add(new Bicicleta(3, this.recorridos.get(1)));
-		this.bicicletas.add(new Bicicleta(3, this.recorridos.get(0)));
-		this.bicicletas.add(new Bicicleta(9, this.recorridos.get(0)));
-		this.bicicletas.add(new Bicicleta(1, this.recorridos.get(2)));
-		this.bicicletas.add(new Bicicleta(1, this.recorridos.get(1)));
-		this.bicicletas.add(new Bicicleta(3, this.recorridos.get(1)));
+		cargarRecorridos();
+		bicicletas.add(new Bicicleta(1, recorridos.get(0)));
+		bicicletas.add(new Bicicleta(3, recorridos.get(1)));
+		bicicletas.add(new Bicicleta(3, recorridos.get(0)));
+		bicicletas.add(new Bicicleta(9, recorridos.get(0)));
+		bicicletas.add(new Bicicleta(1, recorridos.get(2)));
+		bicicletas.add(new Bicicleta(1, recorridos.get(1)));
+		bicicletas.add(new Bicicleta(3, recorridos.get(1)));
 	}
 
 	@Test
