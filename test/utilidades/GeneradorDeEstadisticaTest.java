@@ -2,9 +2,12 @@ package utilidades;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import dominio.Bicicleta;
 import dominio.Estacion;
 import dominio.InformacionEstadistica;
@@ -12,11 +15,11 @@ import dominio.Recorrido;
 
 public class GeneradorDeEstadisticaTest {
 
-	private static List<Bicicleta> bicicletas = new LinkedList<Bicicleta>();
-	private static List<Recorrido> recorridos = new LinkedList<Recorrido>();
+	private  List<Bicicleta> bicicletas = new LinkedList<Bicicleta>();
+	private  List<Recorrido> recorridos = new LinkedList<Recorrido>();
 	
 	
-	public static List<Estacion> cargarEstaciones() {
+	public List<Estacion> cargarEstaciones() {
 
 		List<Estacion> estaciones = new LinkedList<Estacion>();
 		estaciones.add(new Estacion(20, "O"));
@@ -30,7 +33,7 @@ public class GeneradorDeEstadisticaTest {
 	}
 	
 	
-	public static void cargarRecorridos (){
+	public void cargarRecorridos (){
 		
 		List<Estacion> estaciones = cargarEstaciones();
 
@@ -46,8 +49,8 @@ public class GeneradorDeEstadisticaTest {
 		recorridos.get(2).setMinutosRecorridos(10);
 	}
 
-	@BeforeClass
-	public static void cargarDatos() {
+	@Before
+	public void cargarDatos() {
 
 		cargarRecorridos();
 		bicicletas.add(new Bicicleta(1, recorridos.get(0)));
@@ -92,8 +95,8 @@ public class GeneradorDeEstadisticaTest {
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
 		List<RecorridoDTO> recorridosEsperados = new LinkedList<RecorridoDTO>();
 		
-		recorridosEsperados.add(Recorrido.parsearADTO(recorridos.get(0)));
-		recorridosEsperados.add(Recorrido.parsearADTO(recorridos.get(1)));
+		recorridosEsperados.add(this.recorridos.get(0).parsearADTO());
+		recorridosEsperados.add(this.recorridos.get(1).parsearADTO());
 		
 		generador.generarEstadistica(bicicletas);
 		Assert.assertEquals(recorridosEsperados, generador.terminar().recorridosMasRealizados());
@@ -149,8 +152,8 @@ public class GeneradorDeEstadisticaTest {
 		idBicicletasMenosUsadas.add(9);
 		
 		List<RecorridoDTO> recorridosEsperados = new LinkedList<RecorridoDTO>();
-		recorridosEsperados.add(Recorrido.parsearADTO(recorridos.get(0)));
-		recorridosEsperados.add(Recorrido.parsearADTO(recorridos.get(1)));
+		recorridosEsperados.add(recorridos.get(0).parsearADTO());
+		recorridosEsperados.add(recorridos.get(1).parsearADTO());
 		
 		int tiempoPromedio = 14;		
 		

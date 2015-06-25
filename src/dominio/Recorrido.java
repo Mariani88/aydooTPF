@@ -66,10 +66,10 @@ public class Recorrido {
 	
 	
 	
-	public static RecorridoDTO parsearADTO(Recorrido recorrido) {
+	public  RecorridoDTO parsearADTO() {
 		
-		int origen = recorrido.getEstacionOrigen().getId();
-		int destino = recorrido.getEstacionDestino().getId();
+		int origen = this.estacionOrigen.getId();
+		int destino =this.estacionDestino.getId();
 		
 		return new RecorridoDTO (origen, destino);
 	}
