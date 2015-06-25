@@ -72,8 +72,7 @@ public class InformacionEstadisticaTest {
 				this.info.bicicletasMenosUsadas());
 	}
 	
-
-	/*@Test
+	@Test
 	public void RecorridosMasRelizadosDebeDevolverRecorridoMasRealizado() {
 
 		List<RecorridoDTO> recorridosMasRealizados = new LinkedList<RecorridoDTO>();
@@ -83,11 +82,10 @@ public class InformacionEstadisticaTest {
 
 		recorridosMasRealizados.add(new RecorridoDTO(1, 1));
 		recorridosMasRealizados.add(new RecorridoDTO(1, 2));
-		
-		Assert.assertEquals(recorridosMasRealizados,
-				this.info.recorridosMasRealizados());	
-	}*/
-	
+
+		Assert.assertTrue(recorridosMasRealizados.containsAll(this.info
+				.recorridosMasRealizados()));
+	}
 	
 	@Test
 	public void RecorridosMasRelizadosNoDebeDevolverMaximosViejos (){
