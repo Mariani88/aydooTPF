@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-
 import dominio.Bicicleta;
 import dominio.Estacion;
 import dominio.InformacionEstadistica;
@@ -19,23 +17,21 @@ public class GeneradorDeEstadisticaTest {
 	private  List<Recorrido> recorridos = new LinkedList<Recorrido>();
 	
 	
-	public List<Estacion> cargarEstaciones() {
-
-		List<Estacion> estaciones = new LinkedList<Estacion>();
+	public void cargarEstaciones(List <Estacion> estaciones) {
+		
 		estaciones.add(new Estacion(20, "O"));
 		estaciones.add(new Estacion(30, "D"));
 		estaciones.add(new Estacion(11, "O"));
 		estaciones.add(new Estacion(22, "D"));
 		estaciones.add(new Estacion(100, "O"));
 		estaciones.add(new Estacion(200, "D"));
-
-		return estaciones;
 	}
 	
 	
 	public void cargarRecorridos (){
 		
-		List<Estacion> estaciones = cargarEstaciones();
+		List<Estacion> estaciones = new LinkedList <Estacion> ();
+		cargarEstaciones(estaciones);
 
 		recorridos.add( new Recorrido(estaciones.get(0),
 				estaciones.get(1)) );
