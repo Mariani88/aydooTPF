@@ -76,6 +76,6 @@ public class Recorrido {
 	
 	public int hashCode (){
 		
-		return this.estacionOrigen.hashCode();
+		return this.estacionOrigen.getId();
 	}
 }
