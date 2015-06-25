@@ -73,7 +73,7 @@ public class InformacionEstadisticaTest {
 	}
 	
 
-	@Test
+	/*@Test
 	public void RecorridosMasRelizadosDebeDevolverRecorridoMasRealizado() {
 
 		List<RecorridoDTO> recorridosMasRealizados = new LinkedList<RecorridoDTO>();
@@ -86,7 +86,7 @@ public class InformacionEstadisticaTest {
 		
 		Assert.assertEquals(recorridosMasRealizados,
 				this.info.recorridosMasRealizados());	
-	}
+	}*/
 	
 	
 	@Test
