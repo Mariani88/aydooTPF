@@ -33,7 +33,6 @@ public class Estacion {
 	
 	public int hashCode (){
 		
-		Integer entero = new Integer (this.id);
-		return entero.hashCode();
+		return this.id;
 	}
 }
