@@ -27,13 +27,23 @@ public class InformacionEstadisticaTest {
 
 		Assert.assertEquals(bicicletasMasUsadasEsperadas,
 				this.info.bicicletasMasUsadas());
+	}
+	
+	
+	@Test
+	public void getBicicletasMasUsadasNoDebeDevolverMaximoViejos() {
 		
+		List<Integer> bicicletasMasUsadasEsperadas = new LinkedList<Integer>();
+		
+		this.info.guardarBicicletasMasUsadas(3, 40);
+		this.info.guardarBicicletasMasUsadas(4, 40);
 		this.info.guardarBicicletasMasUsadas(1, 1000);
-		bicicletasMasUsadasEsperadas.clear();
+		
 		bicicletasMasUsadasEsperadas.add(1);
 		Assert.assertEquals(bicicletasMasUsadasEsperadas,
 				this.info.bicicletasMasUsadas());
 	}
+	
 
 	@Test
 	public void BicicletasMenosUsadasDebeDevolverListaDeBicicletasMenosUsadas() {
@@ -47,13 +57,21 @@ public class InformacionEstadisticaTest {
 
 		Assert.assertEquals(bicicletasMenosUsadasEsperadas,
 				this.info.bicicletasMenosUsadas());
+	}
+	
+	@Test
+	public void BicicletasMenosUsadasNoDebeDEvolverMinimosViejos (){
 		
+		this.info.guardarBicicletasMenosUsadas(3, 40);
+		this.info.guardarBicicletasMenosUsadas(4, 40);
 		this.info.guardarBicicletasMenosUsadas(1, 10);
-		bicicletasMenosUsadasEsperadas.clear();
+		
+		List<Integer> bicicletasMenosUsadasEsperadas = new LinkedList<Integer>();
 		bicicletasMenosUsadasEsperadas.add(1);
 		Assert.assertEquals(bicicletasMenosUsadasEsperadas,
 				this.info.bicicletasMenosUsadas());
 	}
+	
 
 	@Test
 	public void RecorridosMasRelizadosDebeDevolverRecorridoMasRealizado() {
@@ -68,14 +86,27 @@ public class InformacionEstadisticaTest {
 		
 		Assert.assertEquals(recorridosMasRealizados,
 				this.info.recorridosMasRealizados());	
+	}
+	
+	
+	@Test
+	public void RecorridosMasRelizadosNoDebeDevolverMaximosViejos (){
+		
+		List<RecorridoDTO> recorridosMasRealizados = new LinkedList<RecorridoDTO>();
+
+		this.info.guardarRecorridoMasRealizado(new RecorridoDTO(1, 1), 50);
+		this.info.guardarRecorridoMasRealizado(new RecorridoDTO(1, 2), 50);
 		
 		this.info.guardarRecorridoMasRealizado(new RecorridoDTO(10, 10), 100);
-		recorridosMasRealizados.clear();;
+		
 		recorridosMasRealizados.add(new RecorridoDTO(10, 10));
 		
 		Assert.assertEquals(recorridosMasRealizados,
 				this.info.recorridosMasRealizados());	
+		
 	}
+	
+	
 	
 	@Test(expected=BicicletaMasUsadaExcepcion.class)
 	public void excepcionSiSeIntentaGuardarBicicletaConMenorUsoAlMaximo (){
