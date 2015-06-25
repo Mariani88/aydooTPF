@@ -36,7 +36,7 @@ public class InformacionEstadisticaTest {
 	}
 
 	@Test
-	public void getBicicletasMenosUsadasDebeDevolverListaDeBicicletasMenosUsadas() {
+	public void BicicletasMenosUsadasDebeDevolverListaDeBicicletasMenosUsadas() {
 
 		List<Integer> bicicletasMenosUsadasEsperadas = new LinkedList<Integer>();
 
@@ -56,7 +56,7 @@ public class InformacionEstadisticaTest {
 	}
 
 	@Test
-	public void getRecorridosMasRelizados() {
+	public void RecorridosMasRelizadosDebeDevolverRecorridoMasRealizado() {
 
 		List<RecorridoDTO> recorridosMasRealizados = new LinkedList<RecorridoDTO>();
 
