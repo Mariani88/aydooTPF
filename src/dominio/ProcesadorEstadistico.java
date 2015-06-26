@@ -1,11 +1,14 @@
 package dominio;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
 
-import javax.management.monitor.Monitor;
-
-import excepciones.DirectorioNoExisteExcepcion;
 import utilidades.GeneradorDeEstadistica;
 import utilidades.GestorDeArchivos;
 import utilidades.MonitorDeDirectorio;
@@ -16,6 +19,7 @@ public class ProcesadorEstadistico {
 	private static GeneradorDeEstadistica generadorDeEstadisticas;
 	private static GestorDeArchivos gestorDeArchivos;
 	private static Scanner escaner = new Scanner (System.in);
+	private static String directorioDeTrabajo = null;
 	
 	public static void main (String args []){
 		
@@ -55,19 +59,35 @@ public class ProcesadorEstadistico {
 		}
 	}
 	
-	private static void comenzarProcesamiento (){ //ACA VA LA LOGICA DE PROCESAMIENTO
+	private static void comenzarProcesamiento () { //ACA VA LA LOGICA DE PROCESAMIENTO
 		pedirDirectorioDeTrabajo ();
+		generadorDeEstadisticas = new GeneradorDeEstadistica ();
 		
-		
-		
-		
-		
+		try {	
+			ZipFile [] archivosZip = gestorDeArchivos.obtenerArchivosZip(directorioDeTrabajo);
+			
+			for ( int i = 0; i < archivosZip.length; i++){	
+				gestorDeArchivos.asignarArchivoZipParaProcesar(archivosZip[i]);
+				List <Bicicleta> bicicletas = gestorDeArchivos.obtenerListaDeBicicletas(500);
+				
+				while (bicicletas !=null){
+					generadorDeEstadisticas.generarEstadistica(bicicletas);
+					bicicletas = gestorDeArchivos.obtenerListaDeBicicletas(500);
+				}
+				
+				InformacionEstadistica estadisticas = generadorDeEstadisticas.terminar();
+				gestorDeArchivos.crearYMLCon(estadisticas, directorioDeTrabajo);
+			}
+			
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void pedirDirectorioDeTrabajo()  {
 		
 		boolean configuracionCorrecta = false;
-		String directorioDeTrabajo = null;
+		
 		
 		while (!configuracionCorrecta){
 			System.out.print ("Ingrese directorio de los archivos ZIP a procesar:");
@@ -75,7 +95,7 @@ public class ProcesadorEstadistico {
 			configuracionCorrecta = comprobarExistenciaDeDirectorio (directorioDeTrabajo);
 		}
 		
-		//gestorDeArchivos = new GestorDeArchivos (directorioDeTrabajo);
+		gestorDeArchivos = new GestorDeArchivos ();
 		
 	}
 
