@@ -47,6 +47,26 @@ public class GestorDeArchivosTest {
 		Assert.assertTrue(file.exists());
 	}
 	
+	@Test
+	public void cuandoGeneroElYMLConNombreEntoncesSeCreaElArchivoYML() throws IOException{
+		
+		GestorDeArchivos gestor = new GestorDeArchivos();
+		InformacionEstadistica info = new InformacionEstadistica ();
+		
+		info.guardarBicicletasMasUsadas(3, 10);
+		info.guardarBicicletasMenosUsadas(1, 2);
+		info.guardarRecorridoMasRealizado(new RecorridoDTO (1,2), 2);
+		info.setTiempoPromedio(30);
+		
+		gestor.crearYMLCon(info, PATH_ARCHIVOS_YML, "nombre.yml"); 
+		
+		File file = new File (PATH_ARCHIVOS_YML + "/nombre.yml");
+			
+		Assert.assertTrue(file.exists());
+	}
+	
+	
+	
 	
 	@Test
 	public void obtenerMenosBicicletasDeLasHayEnArchivoCSV() throws ZipException,

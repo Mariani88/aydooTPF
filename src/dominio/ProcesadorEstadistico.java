@@ -21,7 +21,7 @@ public class ProcesadorEstadistico {
 	public static void main (String args []){
 		
 		inicializar();
-		monitorDeDirectorio.monitorear ();
+		//monitorDeDirectorio.monitorear ();
 		menu();
 		escaner.close();
 			
@@ -73,12 +73,12 @@ public class ProcesadorEstadistico {
 					generadorDeEstadisticas.generarEstadistica(bicicletas);
 					bicicletas = gestorDeArchivos.obtenerListaDeBicicletas(500);
 				}
-				
-				InformacionEstadistica estadisticas = generadorDeEstadisticas.terminar();
-				gestorDeArchivos.crearYMLCon(estadisticas, directorioDeTrabajo + "/salida");
 			}
 			
+			InformacionEstadistica estadisticas = generadorDeEstadisticas.terminar();
+			gestorDeArchivos.crearYMLCon(estadisticas, directorioDeTrabajo + "/salida");
 			System.out.println ("archivos procesados");
+			
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
@@ -111,7 +111,7 @@ public class ProcesadorEstadistico {
 			directorioDeMonitoreo = escaner.next();
 			configuracionCorrecta = comprobarExistenciaDeDirectorio (directorioDeMonitoreo);
 		}
-		monitorDeDirectorio = new MonitorDeDirectorio (directorioDeMonitoreo);
+		//monitorDeDirectorio = new MonitorDeDirectorio (directorioDeMonitoreo);
 	}
 
 	private static boolean comprobarExistenciaDeDirectorio(

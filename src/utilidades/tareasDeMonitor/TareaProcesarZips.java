@@ -1,0 +1,54 @@
+package utilidades.tareasDeMonitor;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.List;
+import java.util.TimerTask;
+import java.util.zip.ZipFile;
+
+import utilidades.GeneradorDeEstadistica;
+import utilidades.GestorDeArchivos;
+import dominio.Bicicleta;
+import dominio.InformacionEstadistica;
+
+public class TareaProcesarZips extends TimerTask{
+	
+	private GestorDeArchivos gestorDeArchivos = new GestorDeArchivos ();
+	private String directorioDeTrabajo;
+	
+	public TareaProcesarZips (String directorioDeTrabajo){
+		this.directorioDeTrabajo = directorioDeTrabajo;
+	}
+	
+	@Override
+	public void run() {
+		
+	/*	GeneradorDeEstadistica generadorDeEstadisticas = new GeneradorDeEstadistica ();
+		
+		try {	
+			ZipFile [] archivosZip = gestorDeArchivos.obtenerArchivosZip(directorioDeTrabajo);
+			
+			for ( int i = 0; i < archivosZip.length; i++){	
+				gestorDeArchivos.asignarArchivoZipParaProcesar(archivosZip[i]);
+				
+				List <Bicicleta> bicicletas = gestorDeArchivos.obtenerListaDeBicicletas(500);
+				float porcentaje = (float)(i+1) *100/archivosZip.length;
+				System.out.println ("procesando archivos, espere..."+ porcentaje + "%");
+				
+				while (bicicletas.size() != 0){ //leo todos los CSV del zip
+					generadorDeEstadisticas.generarEstadistica(bicicletas);
+					bicicletas = gestorDeArchivos.obtenerListaDeBicicletas(500);
+				}
+
+				InformacionEstadistica estadisticas = generadorDeEstadisticas
+						.terminar();
+				gestorDeArchivos.crearYMLCon(estadisticas, directorioDeTrabajo
+						+ "/salida", archivosZip[i].getName());
+			}
+
+			System.out.println ("archivos procesados");
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+		}*/	
+	}
+}
