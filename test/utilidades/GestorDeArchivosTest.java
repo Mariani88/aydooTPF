@@ -16,9 +16,10 @@ import dominio.InformacionEstadistica;
 
 public class GestorDeArchivosTest {
 	
-	private static final String PATH_ARCHIVOS_YML = "salida";
-	private static final String PATH_INVALIDO = "path invalido";
-	private static final String PATH_ARCHIVOS_ZIP = "documentos/archivosZipParaTest";
+	private  String PATH_ARCHIVOS_YML = "salida";
+	private  String PATH_INVALIDO = "path invalido";
+	private  String PATH_ARCHIVOS_ZIP = "documentos/archivosZipParaTest";
+	private  String PATH_ARCHIVOS_MEZCLADOS = "documentos/directorioArchivosMezclados";
 	
 	@Test(expected= IllegalArgumentException.class)
 	public void cuandoSeQuiereObtenerArchivosDeUnDirectorioInexistenteEsperoExcepcion()
@@ -37,7 +38,7 @@ public class GestorDeArchivosTest {
 		Assert.assertEquals(
 				1,
 				gestorDeArchivos
-						.obtenerArchivosZip("documentos/directorioArchivosMezclados").length);
+						.obtenerArchivosZip(PATH_ARCHIVOS_MEZCLADOS ).length);
 	}
 	
 	@Test
@@ -53,7 +54,7 @@ public class GestorDeArchivosTest {
 		
 		gestor.crearYMLCon(info, PATH_ARCHIVOS_YML); 
 		
-		File file = new File ("salida/estadisticas.yml");
+		File file = new File (PATH_ARCHIVOS_YML +"/estadisticas.yml");
 			
 		Assert.assertTrue(file.exists());
 	}
