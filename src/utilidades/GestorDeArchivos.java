@@ -117,6 +117,11 @@ public class GestorDeArchivos {
 	
 	public void crearYMLCon(InformacionEstadistica info, String directorioDeTrabajo) throws IOException {
 		
+		File directorio = new File (directorioDeTrabajo);
+		if (!directorio.exists()){
+			directorio.mkdir();
+		}
+		
 		File archivoYML = new File (directorioDeTrabajo + "/estadisticas.yml");
 		FileWriter fw = new FileWriter (archivoYML);
 		BufferedWriter bw = new BufferedWriter (fw);

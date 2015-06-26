@@ -16,7 +16,7 @@ import dominio.InformacionEstadistica;
 
 public class GestorDeArchivosTest {
 	
-	private static final String PATH_ARCHIVOS_YML = "documentos";
+	private static final String PATH_ARCHIVOS_YML = "salida";
 	private static final String PATH_INVALIDO = "path invalido";
 	private static final String PATH_ARCHIVOS_ZIP = "documentos/archivos zip para test";
 	
@@ -42,7 +42,7 @@ public class GestorDeArchivosTest {
 		
 		gestor.crearYMLCon(info, PATH_ARCHIVOS_YML); 
 		
-		File file = new File ("documentos/estadisticas.yml");
+		File file = new File ("salida/estadisticas.yml");
 			
 		Assert.assertTrue(file.exists());
 	}
