@@ -18,7 +18,7 @@ public class GestorDeArchivosTest {
 	
 	private static final String PATH_ARCHIVOS_YML = "salida";
 	private static final String PATH_INVALIDO = "path invalido";
-	private static final String PATH_ARCHIVOS_ZIP = "documentos/archivos zip para test";
+	private static final String PATH_ARCHIVOS_ZIP = "documentos/archivosZipParaTest";
 	
 	
 	@Test(expected= IllegalArgumentException.class)
@@ -69,8 +69,9 @@ public class GestorDeArchivosTest {
 		IOException, ParseException{
 		
 		GestorDeArchivos gestor = new GestorDeArchivos();
+		ZipFile zip = new ZipFile (PATH_ARCHIVOS_ZIP + "/recorridos-2010.zip");
 		
-		ZipFile[] archivosZip = gestor.obtenerArchivosZip(PATH_ARCHIVOS_ZIP);
+		ZipFile[] archivosZip = {zip};
 		gestor.asignarArchivoZipParaProcesar(archivosZip[0]);
 		int cantidadTotalDeBicicletasEnElZip = 12632;
 		int cantidadDeBicicletasAObtener = 1000;
