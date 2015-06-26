@@ -1,32 +1,31 @@
 package utilidades;
 
 import java.io.File;
-
-
-
-
 import java.io.IOException;
+import java.util.zip.ZipException;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import dominio.InformacionEstadistica;
-import excepciones.DirectorioNoExisteExcepcion;
 
 public class GestorDeArchivosTest {
 	
-	private String directorio = "documentos";
+	private static final String PATH_INVALIDO = "path invalido";
+	private static final String PATH_ARCHIVOS_ZIP = "documentos/archivos zip para test";
 	
-	@Test(expected=DirectorioNoExisteExcepcion.class)
-	public void directorioInexistenteDeDevolverExcepcion () throws DirectorioNoExisteExcepcion{
+	@Test(expected= IllegalArgumentException.class)
+	public void cuandoSeQuiereObtenerArchivosDeUnDirectorioInexistenteEsperoExcepcion()
+			throws ZipException, IOException{
 		
-		GestorDeArchivos gestor = new GestorDeArchivos ("hola");
+		GestorDeArchivos gestorDeArchivos = new GestorDeArchivos();
+		gestorDeArchivos.obtenerArchivosZip(PATH_INVALIDO);
 	}	
 	
 	@Test
-	public void generarYMLDebeCrearYML () throws DirectorioNoExisteExcepcion, IOException{
+	public void cuandoGeneroElYMLEntoncesSeCreaElArchivoYML() throws IOException{
 		
-		GestorDeArchivos gestor = new GestorDeArchivos (this.directorio);
+		GestorDeArchivos gestor = new GestorDeArchivos();
 		InformacionEstadistica info = new InformacionEstadistica ();
 		
 		info.guardarBicicletasMasUsadas(3, 10);
@@ -34,10 +33,12 @@ public class GestorDeArchivosTest {
 		info.guardarRecorridoMasRealizado(new RecorridoDTO (1,2), 2);
 		info.setTiempoPromedio(30);
 		
-		gestor.crearYMLCon (info);
+		gestor.crearYMLCon(info, PATH_ARCHIVOS_ZIP); 
 		
-		File file = new File (this.directorio + "/estadisticas.yml");
+		File file = new File (PATH_ARCHIVOS_ZIP+ "/estadisticas.yml");
 			
 		Assert.assertTrue(file.exists());
 	}
+	
+	
 }

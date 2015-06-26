@@ -5,30 +5,60 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
 
 import dominio.InformacionEstadistica;
-import excepciones.DirectorioNoExisteExcepcion;
 
 public class GestorDeArchivos {
-
-	private String directorioDeDescompresion;
-	private String directorioDeTrabajo;
-	private String directorioArchivosProcesados;
 	
-	public GestorDeArchivos (String directorioDeTrabajo) throws DirectorioNoExisteExcepcion{
+	public ZipFile[] obtenerArchivosZip(String path) throws ZipException, IOException {
+		File directorio = new File(path);
+		comprobarPath(directorio.toPath());
+		File[] listaArchivosEnDirectorio = directorio.listFiles();
+		ZipFile[] archivoZip = new ZipFile[listaArchivosEnDirectorio.length];
 		
-		File file = new File (directorioDeTrabajo);
-		
-		if ( file.exists()) {
-			this.directorioDeTrabajo = directorioDeTrabajo;
+		for(int i= 0; i< listaArchivosEnDirectorio.length ; i++){
+			archivoZip[i] = new ZipFile(listaArchivosEnDirectorio[i]);
 		}
-		else throw new DirectorioNoExisteExcepcion();
+		return archivoZip;
 	}
 
-	public void crearYMLCon(InformacionEstadistica info) throws IOException {
+	public Enumeration<? extends ZipEntry> leerArchivosCSVContenidosEnZip(ZipFile zipFiles) {
+		Enumeration<? extends ZipEntry> listaDeArchivosCSVEnZip =  zipFiles.entries();
 		
-		File archivoYML = new File (this.directorioDeTrabajo + "/estadisticas.yml");
+		return listaDeArchivosCSVEnZip;
+	}
+
+	public void validarQueElArchivoSeaCSV(ZipEntry archivoCSV) {
+		String name = archivoCSV.getName();
+		if(!name.contains(".csv")){
+			throw new IllegalArgumentException("El archivo con el nombre "+name+
+					" no es un archivo csv");
+		}
+	}
+
+	private void comprobarPath(Path path) {
+		try{
+			Boolean elDirectorioEsValido = ((Boolean) Files.getAttribute(path,
+					"basic:isDirectory", LinkOption.NOFOLLOW_LINKS));
+			if (!elDirectorioEsValido) {
+				throw new IllegalArgumentException("El Path: "+ path + " no es un directorio");
+			}
+		} catch (IOException ioe) {
+			throw new IllegalArgumentException("El directorio con el path: "+path+"no existe" );
+		}
+	}
+	
+	public void crearYMLCon(InformacionEstadistica info, String directorioDeTrabajo) throws IOException {
+		
+		File archivoYML = new File (directorioDeTrabajo + "/estadisticas.yml");
 		FileWriter fw = new FileWriter (archivoYML);
 		BufferedWriter bw = new BufferedWriter (fw);
 		PrintWriter pw = new PrintWriter (bw);
@@ -84,4 +114,5 @@ public class GestorDeArchivos {
 		
 		pw.println("");
 	}	
+	
 }
