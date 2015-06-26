@@ -3,10 +3,8 @@ package dominio;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 import utilidades.GeneradorDeEstadistica;
@@ -27,8 +25,6 @@ public class ProcesadorEstadistico {
 		monitorDeDirectorio.monitorear ();
 		menu();
 		escaner.close();
-			
-			
 	}
 	
 	private static void inicializar (){
