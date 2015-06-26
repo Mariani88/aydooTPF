@@ -1,5 +1,6 @@
 package utilidades.tareasDeMonitor;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
@@ -23,7 +24,7 @@ public class TareaProcesarZips extends TimerTask{
 	@Override
 	public void run() {
 		
-	/*	GeneradorDeEstadistica generadorDeEstadisticas = new GeneradorDeEstadistica ();
+		GeneradorDeEstadistica generadorDeEstadisticas = new GeneradorDeEstadistica ();
 		
 		try {	
 			ZipFile [] archivosZip = gestorDeArchivos.obtenerArchivosZip(directorioDeTrabajo);
@@ -42,13 +43,21 @@ public class TareaProcesarZips extends TimerTask{
 
 				InformacionEstadistica estadisticas = generadorDeEstadisticas
 						.terminar();
+			
+				String nombreYML = this.obtenerNombreArchivo (archivosZip[i]);
 				gestorDeArchivos.crearYMLCon(estadisticas, directorioDeTrabajo
-						+ "/salida", archivosZip[i].getName());
+						+ "/salida",nombreYML );
 			}
 
 			System.out.println ("archivos procesados");
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
-		}*/	
+		}	
+	}
+
+	private String obtenerNombreArchivo(ZipFile zipFile) {
+		
+		File archivo = new File (zipFile.getName());
+		return archivo.getName();
 	}
 }

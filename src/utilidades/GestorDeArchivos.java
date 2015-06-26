@@ -161,7 +161,7 @@ public class GestorDeArchivos {
 			directorio.mkdir();
 		}
 
-		File archivoYML = new File(directorioDeTrabajo + "/" + nombreYML);
+		File archivoYML = new File(directorioDeTrabajo + "/" + nombreYML+ ".yml");
 		FileWriter fw = new FileWriter(archivoYML);
 		BufferedWriter bw = new BufferedWriter(fw);
 		PrintWriter pw = new PrintWriter(bw);
