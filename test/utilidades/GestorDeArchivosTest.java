@@ -69,7 +69,7 @@ public class GestorDeArchivosTest {
 		info.guardarRecorridoMasRealizado(new RecorridoDTO (1,2), 2);
 		info.setTiempoPromedio(30);
 		
-		gestor.crearYMLCon(info, PATH_ARCHIVOS_YML, "nombre.yml"); 
+		gestor.crearYMLCon(info, PATH_ARCHIVOS_YML, "nombre"); 
 		
 		File file = new File (PATH_ARCHIVOS_YML + "/nombre.yml");
 			
