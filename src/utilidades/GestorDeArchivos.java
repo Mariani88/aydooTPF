@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
@@ -37,22 +38,24 @@ public class GestorDeArchivos {
 	
 	private ZipFile [] filtrarArchivos (File[] listaArchivosEnDirectorio) throws ZipException, IOException{
 		
-		int numeroDeArchivosZip = 0;
+		List <ZipFile> listaDeZips = new LinkedList<ZipFile> ();
+		
 		
 		for ( int i = 0; i < listaArchivosEnDirectorio.length; i++){
 			boolean esZip = listaArchivosEnDirectorio[i].getName().contains(".zip");
 			
-			if (esZip) numeroDeArchivosZip++;
+			if (esZip) listaDeZips.add(new ZipFile(listaArchivosEnDirectorio[i]));
 		}
 		
-		ZipFile [] archivosZip = new ZipFile [numeroDeArchivosZip];
+		/*ZipFile [] archivosZip = new ZipFile [numeroDeArchivosZip];
+
 		
 		for ( int i = 0; i < numeroDeArchivosZip; i++){
 			boolean esZip = listaArchivosEnDirectorio[i].getName().contains(".zip");
 			if (esZip) archivosZip [i] = new ZipFile(listaArchivosEnDirectorio[i]);
-		}
+		}*/
 		
-		return archivosZip;
+		return listaDeZips.toArray( new ZipFile [listaDeZips.size()]);
 	}
 	
 	public ZipFile[] obtenerArchivosZip(String path) throws ZipException,

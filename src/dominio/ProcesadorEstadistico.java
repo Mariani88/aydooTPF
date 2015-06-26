@@ -21,7 +21,7 @@ public class ProcesadorEstadistico {
 	public static void main (String args []){
 		
 		inicializar();
-		//monitorDeDirectorio.monitorear ();
+		monitorDeDirectorio.monitorear ();
 		menu();
 		escaner.close();
 			
@@ -47,7 +47,10 @@ public class ProcesadorEstadistico {
 			switch (opcion){
 			case "1":comenzarProcesamiento();
 			break;
-			case "2": System.out.println ("Saliendo...");
+			case "2": {
+				System.out.println ("Saliendo...");
+				monitorDeDirectorio.pararMonitoreo();
+			}
 			break;
 			default : 
 				if (!"1".equals(opcion) && !"2".equals(opcion))
@@ -111,7 +114,7 @@ public class ProcesadorEstadistico {
 			directorioDeMonitoreo = escaner.next();
 			configuracionCorrecta = comprobarExistenciaDeDirectorio (directorioDeMonitoreo);
 		}
-		//monitorDeDirectorio = new MonitorDeDirectorio (directorioDeMonitoreo);
+		monitorDeDirectorio = new MonitorDeDirectorio (directorioDeMonitoreo);
 	}
 
 	private static boolean comprobarExistenciaDeDirectorio(

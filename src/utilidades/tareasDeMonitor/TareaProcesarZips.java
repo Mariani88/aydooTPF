@@ -47,9 +47,9 @@ public class TareaProcesarZips extends TimerTask{
 				String nombreYML = this.obtenerNombreArchivo (archivosZip[i]);
 				gestorDeArchivos.crearYMLCon(estadisticas, directorioDeTrabajo
 						+ "/salida",nombreYML );
+				System.out.println ("archivos procesados:" + (i+1));
 			}
 
-			System.out.println ("archivos procesados");
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}	
