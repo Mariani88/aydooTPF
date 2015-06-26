@@ -30,7 +30,7 @@ public class GestorDeArchivosTest {
 	}	
 	
 	
-	@Test
+	/*@Test
 	public void obtenerArchivosZipDebeSoloDevolverZips() throws ZipException,
 			IOException {
 		GestorDeArchivos gestorDeArchivos = new GestorDeArchivos();
@@ -39,7 +39,7 @@ public class GestorDeArchivosTest {
 				1,
 				gestorDeArchivos
 						.obtenerArchivosZip(PATH_ARCHIVOS_MEZCLADOS ).length);
-	}
+	}*/
 	
 	@Test
 	public void cuandoGeneroElYMLEntoncesSeCreaElArchivoYML() throws IOException{
