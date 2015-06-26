@@ -1,9 +1,15 @@
 package utilidades;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
@@ -48,7 +54,7 @@ public class GestorDeArchivosTest {
 	
 	
 	@Test
-	public void obtenerListaDeBicicletasDevuelveUnaListaDeBicicletas() throws ZipException,
+	public void obtenerMenosBicicletasDeLasHayEnArchivoCSV() throws ZipException,
 		IOException, ParseException{
 		
 		GestorDeArchivos gestor = new GestorDeArchivos();
@@ -62,5 +68,24 @@ public class GestorDeArchivosTest {
 		
 		Assert.assertEquals(cantidadDeBicicletasAObtener, bicicletas.size());
 	}
-
+	
+	@Test
+	public void obtenertTodasLasBicicletasDeLasQueHayEnUnArchivoZipPidiendoDeAMil() throws ZipException,
+		IOException, ParseException{
+		
+		GestorDeArchivos gestor = new GestorDeArchivos();
+		
+		ZipFile[] archivosZip = gestor.obtenerArchivosZip(PATH_ARCHIVOS_ZIP);
+		gestor.asignarArchivoZipParaProcesar(archivosZip[0]);
+		int cantidadTotalDeBicicletasEnElZip = 12632;
+		int cantidadDeBicicletasAObtener = 1000;
+		List<Bicicleta> bicicletas = new ArrayList<Bicicleta>();
+		List<Bicicleta> bicicletasObtenidas;
+		while(!(bicicletasObtenidas = gestor.obtenerListaDeBicicletas(cantidadDeBicicletasAObtener)).isEmpty()){
+			
+			bicicletas.addAll(bicicletasObtenidas);
+		}
+		Assert.assertEquals(cantidadTotalDeBicicletasEnElZip, bicicletas.size());
+	}
+	
 }

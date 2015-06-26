@@ -20,6 +20,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
+import sun.invoke.empty.Empty;
 import dominio.Bicicleta;
 import dominio.Estacion;
 import dominio.InformacionEstadistica;
@@ -64,6 +65,9 @@ public class GestorDeArchivos {
 		Bicicleta bicicleta;
 		
 		if(esPrimeraLecturaDelArchivoZip){
+			if(archivoZip == null){
+				return null;
+			}
 			archivosCSV = leerArchivosCSVContenidosEnZip(archivoZip);
 			esPrimeraLecturaDelArchivoZip = Boolean.FALSE;
 		}
@@ -72,7 +76,7 @@ public class GestorDeArchivos {
 			InputStream stream = archivoZip.getInputStream(archivoCSV);
 		    InputStreamReader inputStreamReader = new InputStreamReader(stream);
 		    bufferDeLectura = new BufferedReader(inputStreamReader);
-		    bufferDeLectura.readLine();
+		    saltearElEncabezadoDelCSV();
 		    esPrimeraLecturaDelArchivoCSV = Boolean.FALSE;
 		}
 		while(bicicletas.size() < cantidad && 
@@ -80,8 +84,14 @@ public class GestorDeArchivos {
 			bicicleta = generarBicicleta(registroLeido);
 			bicicletas.add(bicicleta);
 		}
-	
+		if(!bufferDeLectura.ready() && archivosCSV.hasMoreElements()){
+			esPrimeraLecturaDelArchivoCSV = Boolean.TRUE;
+		}
 		return bicicletas;
+	}
+
+	private void saltearElEncabezadoDelCSV() throws IOException {
+		bufferDeLectura.readLine();
 	}
 	
 	private Bicicleta generarBicicleta(String registroLeido) throws ParseException  {
@@ -92,8 +102,10 @@ public class GestorDeArchivos {
 		String estacionOrigenNombre = campos[4];
 		Integer estacionDestinoId = Integer.parseInt(campos[6]);
 		String estacionDestinoNombre = campos[7];
-		Integer minutosRecorridos = Integer.parseInt(campos[8]);
-		
+		Integer minutosRecorridos = 0;
+		if(campos.length == 9){
+			minutosRecorridos = Integer.parseInt(campos[8]);
+		}
 		Estacion estacionOrigen = new Estacion(estacionOrigenId, estacionOrigenNombre);
 		Estacion estacionDestino = new Estacion(estacionDestinoId,estacionDestinoNombre);
 		Recorrido recorrido = new Recorrido(estacionOrigen, estacionDestino);
@@ -162,7 +174,7 @@ public class GestorDeArchivos {
 		pw.println("");
 	}	
 	
-	private Enumeration<? extends ZipEntry> leerArchivosCSVContenidosEnZip(ZipFile zipFiles) {
+	public Enumeration<? extends ZipEntry> leerArchivosCSVContenidosEnZip(ZipFile zipFiles) {
 		Enumeration<? extends ZipEntry> listaDeArchivosCSVEnZip =  zipFiles.entries();
 		
 		return listaDeArchivosCSVEnZip;
