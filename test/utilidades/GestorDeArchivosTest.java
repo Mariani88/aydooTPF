@@ -20,7 +20,6 @@ public class GestorDeArchivosTest {
 	private static final String PATH_INVALIDO = "path invalido";
 	private static final String PATH_ARCHIVOS_ZIP = "documentos/archivosZipParaTest";
 	
-	
 	@Test(expected= IllegalArgumentException.class)
 	public void cuandoSeQuiereObtenerArchivosDeUnDirectorioInexistenteEsperoExcepcion()
 			throws ZipException, IOException{
@@ -28,6 +27,18 @@ public class GestorDeArchivosTest {
 		GestorDeArchivos gestorDeArchivos = new GestorDeArchivos();
 		gestorDeArchivos.obtenerArchivosZip(PATH_INVALIDO);
 	}	
+	
+	
+	@Test
+	public void obtenerArchivosZipDebeSoloDevolverZips() throws ZipException,
+			IOException {
+		GestorDeArchivos gestorDeArchivos = new GestorDeArchivos();
+
+		Assert.assertEquals(
+				1,
+				gestorDeArchivos
+						.obtenerArchivosZip("documentos/directorioArchivosMezclados").length);
+	}
 	
 	@Test
 	public void cuandoGeneroElYMLEntoncesSeCreaElArchivoYML() throws IOException{
