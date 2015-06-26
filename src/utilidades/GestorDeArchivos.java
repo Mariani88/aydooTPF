@@ -149,7 +149,7 @@ public class GestorDeArchivos {
 			
 			RecorridoDTO recorrido = iterador.next();
 			pw.println("id origen:" + recorrido.getIdEstacionOrigen());
-			pw.println("id destino" + recorrido.getIdEstacionDestino());
+			pw.println("id destino:" + recorrido.getIdEstacionDestino());
 			pw.println("");
 		}
 	}

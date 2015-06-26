@@ -3,8 +3,10 @@ package dominio;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 import utilidades.GeneradorDeEstadistica;
@@ -25,6 +27,8 @@ public class ProcesadorEstadistico {
 		monitorDeDirectorio.monitorear ();
 		menu();
 		escaner.close();
+			
+			
 	}
 	
 	private static void inicializar (){
@@ -65,16 +69,19 @@ public class ProcesadorEstadistico {
 			for ( int i = 0; i < archivosZip.length; i++){	
 				gestorDeArchivos.asignarArchivoZipParaProcesar(archivosZip[i]);
 				List <Bicicleta> bicicletas = gestorDeArchivos.obtenerListaDeBicicletas(500);
+				float porcentaje = (float)(i+1) *100/archivosZip.length;
+				System.out.println ("procesando archivos, espere..."+ porcentaje + "%");
 				
-				while (bicicletas !=null){
+				while (bicicletas.size() != 0){
 					generadorDeEstadisticas.generarEstadistica(bicicletas);
 					bicicletas = gestorDeArchivos.obtenerListaDeBicicletas(500);
 				}
 				
 				InformacionEstadistica estadisticas = generadorDeEstadisticas.terminar();
-				gestorDeArchivos.crearYMLCon(estadisticas, directorioDeTrabajo);
+				gestorDeArchivos.crearYMLCon(estadisticas, directorioDeTrabajo + "/salida");
 			}
 			
+			System.out.println ("archivos procesados");
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
