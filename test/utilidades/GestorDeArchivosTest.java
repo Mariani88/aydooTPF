@@ -30,7 +30,7 @@ public class GestorDeArchivosTest {
 	}	
 	
 	
-	/*@Test
+	@Test
 	public void obtenerArchivosZipDebeSoloDevolverZips() throws ZipException,
 			IOException {
 		GestorDeArchivos gestorDeArchivos = new GestorDeArchivos();
@@ -39,7 +39,7 @@ public class GestorDeArchivosTest {
 				1,
 				gestorDeArchivos
 						.obtenerArchivosZip(PATH_ARCHIVOS_MEZCLADOS ).length);
-	}*/
+	}
 	
 	@Test
 	public void cuandoGeneroElYMLEntoncesSeCreaElArchivoYML() throws IOException{
@@ -59,7 +59,7 @@ public class GestorDeArchivosTest {
 		Assert.assertTrue(file.exists());
 	}
 	
-	/*@Test
+	@Test
 	public void cuandoGeneroElYMLConNombreEntoncesSeCreaElArchivoYML() throws IOException{
 		
 		GestorDeArchivos gestor = new GestorDeArchivos();
@@ -75,7 +75,7 @@ public class GestorDeArchivosTest {
 		File file = new File (PATH_ARCHIVOS_YML + "/nombre.yml");
 			
 		Assert.assertTrue(file.exists());
-	}*/
+	}
 	
 	
 	

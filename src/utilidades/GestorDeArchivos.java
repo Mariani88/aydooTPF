@@ -47,7 +47,7 @@ public class GestorDeArchivos {
 		
 		ZipFile [] archivosZip = new ZipFile [numeroDeArchivosZip];
 		
-		for ( int i = 0; i < listaArchivosEnDirectorio.length; i++){
+		for ( int i = 0; i < numeroDeArchivosZip; i++){
 			boolean esZip = listaArchivosEnDirectorio[i].getName().contains(".zip");
 			if (esZip) archivosZip [i] = new ZipFile(listaArchivosEnDirectorio[i]);
 		}
