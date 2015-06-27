@@ -1,17 +1,14 @@
 package utilidades;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import dominio.Bicicleta;
 import dominio.InformacionEstadistica;
 
@@ -21,7 +18,7 @@ public class GestorDeArchivosTest {
 	private  String PATH_ARCHIVOS_YML = "salida";
 	private  String PATH_INVALIDO = "path invalido";
 	private  String PATH_ARCHIVOS_ZIP = "documentos/archivosZipParaTest";
-	private  String PATH_ARCHIVOS_MEZCLADOS = "documentos/directorioArchivosMezclados";
+	//private  String PATH_ARCHIVOS_MEZCLADOS = "documentos/directorioArchivosMezclados";
 	
 	@Test(expected= IllegalArgumentException.class)
 	public void cuandoSeQuiereObtenerArchivosDeUnDirectorioInexistenteEsperoExcepcion()
@@ -143,9 +140,4 @@ public class GestorDeArchivosTest {
 		
 	}
 
-
-	private void crearZipDePrueba() throws IOException {
-		
-		
-	}
 }

@@ -40,6 +40,7 @@ public class GestorDeArchivos {
 		
 		List <ZipFile> listaDeZips = new LinkedList<ZipFile> ();
 		
+		
 		for ( int i = 0; i < listaArchivosEnDirectorio.length; i++){
 			boolean esZip = listaArchivosEnDirectorio[i].getName().contains(".zip");
 			
