@@ -253,7 +253,5 @@ public class GestorDeArchivos {
 			directorioProcesados.mkdir();
 		
 		archivoAMover.renameTo(archivoYaProcesado);
-		
 	}
-
 }

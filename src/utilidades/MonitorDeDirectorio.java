@@ -26,6 +26,4 @@ public class MonitorDeDirectorio {
 		
 		this.temporizadorDeMonitoreo.cancel();
 	}
-	
-	
 }

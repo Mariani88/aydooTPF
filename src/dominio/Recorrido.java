@@ -4,7 +4,6 @@ import utilidades.Ruta;
 
 public class Recorrido {
 
-	
 	private Estacion estacionOrigen;
 	private Estacion estacionDestino;
 	private int minutosRecorridos;
