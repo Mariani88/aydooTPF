@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class TareaProcesarZipsTest {
 
-	private static final String PATH_ARCHIVOS_ZIP = "documentos/archivosZipParaTest";
+	private static final String PATH_ARCHIVOS_ZIP = "paraTestear/archivosZipParaTest";
 
 	@Test
 	public void runDebeProcesarCadaArchivoPorSeparado() {

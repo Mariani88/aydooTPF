@@ -14,10 +14,10 @@ import dominio.InformacionEstadistica;
 
 public class GestorDeArchivosTest {
 	
-	private  String DOCUMENTOS_ZIP_PROCESADOS_TEST_ZIP= "documentos/zipProcesadosTest";
+	private  String DOCUMENTOS_ZIP_PROCESADOS_TEST_ZIP= "paraTestear/zipProcesadosTest";
 	private  String PATH_ARCHIVOS_YML = "salida";
 	private  String PATH_INVALIDO = "path invalido";
-	private  String PATH_ARCHIVOS_ZIP = "documentos/archivosZipParaTest";
+	private  String PATH_ARCHIVOS_ZIP = "paraTestear/archivosZipParaTest";
 	//private  String PATH_ARCHIVOS_MEZCLADOS = "documentos/directorioArchivosMezclados";
 	
 	@Test(expected= IllegalArgumentException.class)
