@@ -40,20 +40,11 @@ public class GestorDeArchivos {
 		
 		List <ZipFile> listaDeZips = new LinkedList<ZipFile> ();
 		
-		
 		for ( int i = 0; i < listaArchivosEnDirectorio.length; i++){
 			boolean esZip = listaArchivosEnDirectorio[i].getName().contains(".zip");
 			
 			if (esZip) listaDeZips.add(new ZipFile(listaArchivosEnDirectorio[i]));
 		}
-		
-		/*ZipFile [] archivosZip = new ZipFile [numeroDeArchivosZip];
-
-		
-		for ( int i = 0; i < numeroDeArchivosZip; i++){
-			boolean esZip = listaArchivosEnDirectorio[i].getName().contains(".zip");
-			if (esZip) archivosZip [i] = new ZipFile(listaArchivosEnDirectorio[i]);
-		}*/
 		
 		return listaDeZips.toArray( new ZipFile [listaDeZips.size()]);
 	}

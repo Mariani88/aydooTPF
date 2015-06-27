@@ -15,17 +15,13 @@ public class MonitorDeDirectorio {
 		this.tarea = new TareaProcesarZips (directorioDeMonitoreo);
 	}
 	
-	
 	public void monitorear() {
 		
 		this.temporizadorDeMonitoreo.schedule(this.tarea,10, 3000);
 	}
 	
-	
-	public void pararMonitoreo (){
+	public void pararMonitoreo(){
 		
 		this.temporizadorDeMonitoreo.cancel();
 	}
-	
-	
 }
