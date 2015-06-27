@@ -1,6 +1,5 @@
 package dominio;
 
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -24,5 +23,4 @@ public class EstacionTest {
 		
 		Assert.assertEquals(estacion1.hashCode(), estacion2.hashCode());
 	}
-	
 }

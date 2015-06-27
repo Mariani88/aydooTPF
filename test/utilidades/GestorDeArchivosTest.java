@@ -56,6 +56,7 @@ public class GestorDeArchivosTest {
 		File file = new File (PATH_ARCHIVOS_YML +"/estadisticas.yml");
 			
 		Assert.assertTrue(file.exists());
+		file.delete();
 	}
 	
 	@Test
@@ -74,6 +75,7 @@ public class GestorDeArchivosTest {
 		File file = new File (PATH_ARCHIVOS_YML + "/nombre.yml");
 			
 		Assert.assertTrue(file.exists());
+		file.delete();
 	}
 	
 	
