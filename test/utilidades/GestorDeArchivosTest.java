@@ -1,6 +1,7 @@
 package utilidades;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import dominio.InformacionEstadistica;
 
 public class GestorDeArchivosTest {
 	
-	private  String DOCUMENTOS_ZIP_PROCESADOS_TEST_ZIP= "documentos/zipProcesadosTest/zipTest.zip";
+	private  String DOCUMENTOS_ZIP_PROCESADOS_TEST_ZIP= "documentos/zipProcesadosTest";
 	private  String PATH_ARCHIVOS_YML = "salida";
 	private  String PATH_INVALIDO = "path invalido";
 	private  String PATH_ARCHIVOS_ZIP = "documentos/archivosZipParaTest";
@@ -118,17 +119,33 @@ public class GestorDeArchivosTest {
 	}
 	
 	
-	/*@Test 
-	public void moverArchivoZipAaProcesados() throws IOException{
+	@Test 
+	public void moverArchivoZipAProcesados() throws IOException{
 		
 		GestorDeArchivos gestorDeArchivos = new GestorDeArchivos();
-		
-		ZipFile zipAProcesar = new ZipFile(DOCUMENTOS_ZIP_PROCESADOS_TEST_ZIP);
-		
+		ZipFile zipAProcesar = new ZipFile(DOCUMENTOS_ZIP_PROCESADOS_TEST_ZIP + "/zipTest.zip");
 		gestorDeArchivos.moverZipAProcesados(zipAProcesar);
-		
-		File zipProcesado = new File(DOCUMENTOS_ZIP_PROCESADOS_TEST_ZIP + "/procesados/zipTest.zip");
-		
+		File zipProcesado = new File(DOCUMENTOS_ZIP_PROCESADOS_TEST_ZIP  +"/procesados/zipTest.zip" );
 		Assert.assertTrue( zipProcesado.exists());
-	}*/
+		
+		this.volverArchivoAlOrigen();
+	}
+
+
+	private void volverArchivoAlOrigen() {
+		
+		File destino = new File (DOCUMENTOS_ZIP_PROCESADOS_TEST_ZIP  +"/procesados/zipTest.zip");
+		File origen = new File (DOCUMENTOS_ZIP_PROCESADOS_TEST_ZIP + "/zipTest.zip");
+		File directorioProcesados = new File (destino.getParent());
+		
+		destino.renameTo(origen);
+		directorioProcesados.delete();
+		
+	}
+
+
+	private void crearZipDePrueba() throws IOException {
+		
+		
+	}
 }

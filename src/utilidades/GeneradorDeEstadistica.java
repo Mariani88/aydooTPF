@@ -62,7 +62,7 @@ public class GeneradorDeEstadistica {
 
 	private void almacenarHistorialDeRecorridosYEvaluar(Recorrido recorrido) {
 
-		Ruta recorridoDTO = recorrido.parsearADTO();
+		Ruta recorridoDTO = recorrido.parsearARuta();
 
 		if (this.historialUsoDeRecorridos.containsKey(recorridoDTO)) {
 			int uso = this.historialUsoDeRecorridos.get(recorridoDTO);
