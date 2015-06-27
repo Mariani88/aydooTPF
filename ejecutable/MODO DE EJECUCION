@@ -1,0 +1,14 @@
+Creamos la aplicacion para que funcione en modo consola. Tanto el directorio a monitorear, 
+como el directorio a procesar deben ingresarse.
+
+Como ejecutar ( Ubuntu 14.04):
+
+Abrir consola
+
+1 - Ingresar "java -jar" dejar un espacio y luego arrastrar el jar a la consola. 
+
+o
+
+2 - Ingresar "java -jar 'ruta/archivo.JAR' " 
+
+En ambos casos, las comillas (") quedan excluidas del comando. 
