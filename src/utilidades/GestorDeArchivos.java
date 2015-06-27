@@ -47,14 +47,6 @@ public class GestorDeArchivos {
 			if (esZip) listaDeZips.add(new ZipFile(listaArchivosEnDirectorio[i]));
 		}
 		
-		/*ZipFile [] archivosZip = new ZipFile [numeroDeArchivosZip];
-
-		
-		for ( int i = 0; i < numeroDeArchivosZip; i++){
-			boolean esZip = listaArchivosEnDirectorio[i].getName().contains(".zip");
-			if (esZip) archivosZip [i] = new ZipFile(listaArchivosEnDirectorio[i]);
-		}*/
-		
 		return listaDeZips.toArray( new ZipFile [listaDeZips.size()]);
 	}
 	
@@ -250,11 +242,18 @@ public class GestorDeArchivos {
 
 	public void moverZipAProcesados(ZipFile archivoZip) {
 		
-		String path = archivoZip.getName();
 		
-		File zipAMover = new File(path);
+		File archivoAMover = new File(archivoZip.getName());
+		File directorioProcesados = new File(archivoAMover.getParent()
+				+ "/procesados");
+		File archivoYaProcesado = new File(directorioProcesados.getPath() + "/"
+				+ archivoAMover.getName());
+
+		if (!directorioProcesados.exists())
+			directorioProcesados.mkdir();
 		
-		zipAMover.renameTo(new File("procesados/"+zipAMover.getName()));
+		archivoAMover.renameTo(archivoYaProcesado);
+		
 	}
 
 }

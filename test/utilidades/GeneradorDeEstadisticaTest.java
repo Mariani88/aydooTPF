@@ -91,8 +91,8 @@ public class GeneradorDeEstadisticaTest {
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
 		List<Ruta> recorridosEsperados = new LinkedList<Ruta>();
 		
-		recorridosEsperados.add(this.recorridos.get(0).parsearADTO());
-		recorridosEsperados.add(this.recorridos.get(1).parsearADTO());
+		recorridosEsperados.add(this.recorridos.get(0).parsearARuta());
+		recorridosEsperados.add(this.recorridos.get(1).parsearARuta());
 		
 		generador.generarEstadistica(bicicletas);
 		Assert.assertEquals(recorridosEsperados, generador.terminar().recorridosMasRealizados());
@@ -148,8 +148,8 @@ public class GeneradorDeEstadisticaTest {
 		idBicicletasMenosUsadas.add(9);
 		
 		List<Ruta> recorridosEsperados = new LinkedList<Ruta>();
-		recorridosEsperados.add(recorridos.get(0).parsearADTO());
-		recorridosEsperados.add(recorridos.get(1).parsearADTO());
+		recorridosEsperados.add(recorridos.get(0).parsearARuta());
+		recorridosEsperados.add(recorridos.get(1).parsearARuta());
 		
 		int tiempoPromedio = 14;		
 		

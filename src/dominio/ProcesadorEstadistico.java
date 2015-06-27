@@ -76,6 +76,7 @@ public class ProcesadorEstadistico {
 					generadorDeEstadisticas.generarEstadistica(bicicletas);
 					bicicletas = gestorDeArchivos.obtenerListaDeBicicletas(500);
 				}
+				gestorDeArchivos.moverZipAProcesados(archivosZip [i]);
 			}
 			
 			InformacionEstadistica estadisticas = generadorDeEstadisticas.terminar();
