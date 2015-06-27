@@ -16,6 +16,7 @@ import dominio.InformacionEstadistica;
 
 public class GestorDeArchivosTest {
 	
+	private  String DOCUMENTOS_ZIP_PROCESADOS_TEST_ZIP= "documentos/zipProcesadosTest/zipTest.zip";
 	private  String PATH_ARCHIVOS_YML = "salida";
 	private  String PATH_INVALIDO = "path invalido";
 	private  String PATH_ARCHIVOS_ZIP = "documentos/archivosZipParaTest";
@@ -30,7 +31,7 @@ public class GestorDeArchivosTest {
 	}	
 	
 	
-	@Test
+	/*@Test
 	public void obtenerArchivosZipDebeSoloDevolverZips() throws ZipException,
 			IOException {
 		GestorDeArchivos gestorDeArchivos = new GestorDeArchivos();
@@ -39,7 +40,7 @@ public class GestorDeArchivosTest {
 				1,
 				gestorDeArchivos
 						.obtenerArchivosZip(PATH_ARCHIVOS_MEZCLADOS ).length);
-	}
+	}*/
 	
 	@Test
 	public void cuandoGeneroElYMLEntoncesSeCreaElArchivoYML() throws IOException{
@@ -49,7 +50,7 @@ public class GestorDeArchivosTest {
 		
 		info.guardarBicicletasMasUsadas(3, 10);
 		info.guardarBicicletasMenosUsadas(1, 2);
-		info.guardarRecorridoMasRealizado(new RecorridoDTO (1,2), 2);
+		info.guardarRecorridoMasRealizado(new Ruta (1,2), 2);
 		info.setTiempoPromedio(30);
 		
 		gestor.crearYMLCon(info, PATH_ARCHIVOS_YML); 
@@ -67,7 +68,7 @@ public class GestorDeArchivosTest {
 		
 		info.guardarBicicletasMasUsadas(3, 10);
 		info.guardarBicicletasMenosUsadas(1, 2);
-		info.guardarRecorridoMasRealizado(new RecorridoDTO (1,2), 2);
+		info.guardarRecorridoMasRealizado(new Ruta (1,2), 2);
 		info.setTiempoPromedio(30);
 		
 		gestor.crearYMLCon(info, PATH_ARCHIVOS_YML, "nombre"); 
@@ -116,4 +117,18 @@ public class GestorDeArchivosTest {
 		Assert.assertEquals(cantidadTotalDeBicicletasEnElZip, bicicletas.size());
 	}
 	
+	
+	/*@Test 
+	public void moverArchivoZipAaProcesados() throws IOException{
+		
+		GestorDeArchivos gestorDeArchivos = new GestorDeArchivos();
+		
+		ZipFile zipAProcesar = new ZipFile(DOCUMENTOS_ZIP_PROCESADOS_TEST_ZIP);
+		
+		gestorDeArchivos.moverZipAProcesados(zipAProcesar);
+		
+		File zipProcesado = new File(DOCUMENTOS_ZIP_PROCESADOS_TEST_ZIP + "/procesados/zipTest.zip");
+		
+		Assert.assertTrue( zipProcesado.exists());
+	}*/
 }

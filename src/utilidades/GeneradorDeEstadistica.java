@@ -12,14 +12,14 @@ import dominio.Recorrido;
 public class GeneradorDeEstadistica {
 
 	private Map<Integer, Integer> historialUsoDeBicicletas;
-	private Map<RecorridoDTO, Integer> historialUsoDeRecorridos;
+	private Map<Ruta, Integer> historialUsoDeRecorridos;
 	private InformacionEstadistica estadistica;
 	private int tiempoTotal;
 	private int bicicletasProcesadas;
 
 	public GeneradorDeEstadistica() {
 		this.historialUsoDeBicicletas = new HashMap<Integer, Integer>();
-		this.historialUsoDeRecorridos = new HashMap<RecorridoDTO, Integer>();
+		this.historialUsoDeRecorridos = new HashMap<Ruta, Integer>();
 		this.estadistica = new InformacionEstadistica();
 		this.tiempoTotal = 0;
 		this.bicicletasProcesadas = 0;
@@ -62,7 +62,7 @@ public class GeneradorDeEstadistica {
 
 	private void almacenarHistorialDeRecorridosYEvaluar(Recorrido recorrido) {
 
-		RecorridoDTO recorridoDTO = recorrido.parsearADTO();
+		Ruta recorridoDTO = recorrido.parsearADTO();
 
 		if (this.historialUsoDeRecorridos.containsKey(recorridoDTO)) {
 			int uso = this.historialUsoDeRecorridos.get(recorridoDTO);
@@ -82,7 +82,7 @@ public class GeneradorDeEstadistica {
 		this.bicicletasProcesadas = 0;
 		this.tiempoTotal = 0;
 		this.historialUsoDeBicicletas = new HashMap<Integer, Integer>();
-		this.historialUsoDeRecorridos = new HashMap<RecorridoDTO, Integer>();
+		this.historialUsoDeRecorridos = new HashMap<Ruta, Integer>();
 		
 		return info;
 	}

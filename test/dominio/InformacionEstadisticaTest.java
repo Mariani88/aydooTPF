@@ -9,7 +9,7 @@ import org.junit.Test;
 import excepciones.BicicletaMasUsadaExcepcion;
 import excepciones.BicicletaMenosUsadaExcepcion;
 import excepciones.RecorridoMasRealizadoExcepcion;
-import utilidades.RecorridoDTO;
+import utilidades.Ruta;
 
 public class InformacionEstadisticaTest {
 
@@ -75,13 +75,13 @@ public class InformacionEstadisticaTest {
 	@Test
 	public void RecorridosMasRelizadosDebeDevolverRecorridoMasRealizado() {
 
-		List<RecorridoDTO> recorridosMasRealizados = new LinkedList<RecorridoDTO>();
+		List<Ruta> recorridosMasRealizados = new LinkedList<Ruta>();
 
-		this.info.guardarRecorridoMasRealizado(new RecorridoDTO(1, 1), 50);
-		this.info.guardarRecorridoMasRealizado(new RecorridoDTO(1, 2), 50);
+		this.info.guardarRecorridoMasRealizado(new Ruta(1, 1), 50);
+		this.info.guardarRecorridoMasRealizado(new Ruta(1, 2), 50);
 
-		recorridosMasRealizados.add(new RecorridoDTO(1, 1));
-		recorridosMasRealizados.add(new RecorridoDTO(1, 2));
+		recorridosMasRealizados.add(new Ruta(1, 1));
+		recorridosMasRealizados.add(new Ruta(1, 2));
 
 		Assert.assertTrue(recorridosMasRealizados.containsAll(this.info
 				.recorridosMasRealizados()));
@@ -90,14 +90,14 @@ public class InformacionEstadisticaTest {
 	@Test
 	public void RecorridosMasRelizadosNoDebeDevolverMaximosViejos (){
 		
-		List<RecorridoDTO> recorridosMasRealizados = new LinkedList<RecorridoDTO>();
+		List<Ruta> recorridosMasRealizados = new LinkedList<Ruta>();
 
-		this.info.guardarRecorridoMasRealizado(new RecorridoDTO(1, 1), 50);
-		this.info.guardarRecorridoMasRealizado(new RecorridoDTO(1, 2), 50);
+		this.info.guardarRecorridoMasRealizado(new Ruta(1, 1), 50);
+		this.info.guardarRecorridoMasRealizado(new Ruta(1, 2), 50);
 		
-		this.info.guardarRecorridoMasRealizado(new RecorridoDTO(10, 10), 100);
+		this.info.guardarRecorridoMasRealizado(new Ruta(10, 10), 100);
 		
-		recorridosMasRealizados.add(new RecorridoDTO(10, 10));
+		recorridosMasRealizados.add(new Ruta(10, 10));
 		
 		Assert.assertEquals(recorridosMasRealizados,
 				this.info.recorridosMasRealizados());	
@@ -120,8 +120,8 @@ public class InformacionEstadisticaTest {
 	
 	@Test(expected=RecorridoMasRealizadoExcepcion.class)
 	public void excepcionSiSeIntentaGuardarUnRecorridoMenosRealizadoQueElMaximo (){
-		this.info.guardarRecorridoMasRealizado(new RecorridoDTO (1,2), 3);
-		this.info.guardarRecorridoMasRealizado(new RecorridoDTO (3,4), 1);
+		this.info.guardarRecorridoMasRealizado(new Ruta (1,2), 3);
+		this.info.guardarRecorridoMasRealizado(new Ruta (3,4), 1);
 	}
 	
 	@Test
@@ -166,11 +166,11 @@ public class InformacionEstadisticaTest {
 	@Test
 	public void evaluarDatoDebeGuardarDatoSiRecorridoEsMaximo (){
 		
-		this.info.guardarRecorridoMasRealizado(new RecorridoDTO (1,1),200);
+		this.info.guardarRecorridoMasRealizado(new Ruta (1,1),200);
 		
-		List<RecorridoDTO> recorridosEsperados = new LinkedList<RecorridoDTO> ();
-		recorridosEsperados.add(new RecorridoDTO (2,2));
-		this.info.evaluarRecorrido(new RecorridoDTO (2,2), 3000);
+		List<Ruta> recorridosEsperados = new LinkedList<Ruta> ();
+		recorridosEsperados.add(new Ruta (2,2));
+		this.info.evaluarRecorrido(new Ruta (2,2), 3000);
 		
 		Assert.assertEquals(recorridosEsperados, this.info.recorridosMasRealizados());	
 	}

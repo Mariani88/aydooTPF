@@ -2,7 +2,7 @@ package dominio;
 
 import java.util.Date;
 
-import utilidades.RecorridoDTO;
+import utilidades.Ruta;
 
 public class Recorrido {
 
@@ -66,12 +66,12 @@ public class Recorrido {
 	
 	
 	
-	public  RecorridoDTO parsearADTO() {
+	public  Ruta parsearADTO() {
 		
 		int origen = this.estacionOrigen.getId();
 		int destino =this.estacionDestino.getId();
 		
-		return new RecorridoDTO (origen, destino);
+		return new Ruta (origen, destino);
 	}
 	
 	public int hashCode (){

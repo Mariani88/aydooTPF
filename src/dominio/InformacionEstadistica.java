@@ -9,13 +9,13 @@ import java.util.Map.Entry;
 import excepciones.BicicletaMasUsadaExcepcion;
 import excepciones.BicicletaMenosUsadaExcepcion;
 import excepciones.RecorridoMasRealizadoExcepcion;
-import utilidades.RecorridoDTO;
+import utilidades.Ruta;
 
 public class InformacionEstadistica {
 
 	private Map <Integer, Integer> bicicletasMasUsadas;
 	private Map <Integer, Integer> bicicletasMenosUsadas;
-	private Map <RecorridoDTO, Integer> recorridoMasRealizado;
+	private Map <Ruta, Integer> recorridoMasRealizado;
 	private int tiempoPromedio;
 	
 	
@@ -25,8 +25,8 @@ public class InformacionEstadistica {
 		this.bicicletasMasUsadas.put(-1, 0);
 		this.bicicletasMenosUsadas = new HashMap <Integer, Integer> ();
 		this.bicicletasMenosUsadas.put(-1, 2147483647);
-		this.recorridoMasRealizado = new HashMap <RecorridoDTO, Integer> ();
-		this.recorridoMasRealizado.put(new RecorridoDTO (0,0), 0);
+		this.recorridoMasRealizado = new HashMap <Ruta, Integer> ();
+		this.recorridoMasRealizado.put(new Ruta (0,0), 0);
 		this.tiempoPromedio = -1;
 	}
 
@@ -108,7 +108,7 @@ public class InformacionEstadistica {
 	}
 
 
-	public void guardarRecorridoMasRealizado(RecorridoDTO recorrido, int cantidad) {
+	public void guardarRecorridoMasRealizado(Ruta recorrido, int cantidad) {
 	
 		boolean esMaximo = this.guardarMaximoRecorrido (recorrido, cantidad);
 		
@@ -116,13 +116,13 @@ public class InformacionEstadistica {
 	}
 
 
-	private boolean guardarMaximoRecorrido(RecorridoDTO recorrido, int cantidad) {
+	private boolean guardarMaximoRecorrido(Ruta recorrido, int cantidad) {
 		
 		boolean guardado = false;
 		
-		Iterator<Entry<RecorridoDTO, Integer>> iterador = this.recorridoMasRealizado
+		Iterator<Entry<Ruta, Integer>> iterador = this.recorridoMasRealizado
 				.entrySet().iterator();
-		Entry<RecorridoDTO, Integer> primerPar = iterador.next();
+		Entry<Ruta, Integer> primerPar = iterador.next();
 		
 		if ( cantidad == primerPar.getValue()){
 			this.recorridoMasRealizado.put(recorrido, cantidad);
@@ -160,9 +160,9 @@ public class InformacionEstadistica {
 	}
 
 
-	public List <RecorridoDTO> recorridosMasRealizados() {
+	public List <Ruta> recorridosMasRealizados() {
 		
-		List <RecorridoDTO> recorridosMasRealizados = new LinkedList <RecorridoDTO>();
+		List <Ruta> recorridosMasRealizados = new LinkedList <Ruta>();
 		recorridosMasRealizados.addAll(this.recorridoMasRealizado.keySet());
 		
 		return recorridosMasRealizados;
@@ -189,7 +189,7 @@ public class InformacionEstadistica {
 			this.guardarMinimoBicicleta(id, cantidad);
 	}
 
-	public void evaluarRecorrido(RecorridoDTO recorrido, int cantidad) {
+	public void evaluarRecorrido(Ruta recorrido, int cantidad) {
 		this.guardarMaximoRecorrido(recorrido, cantidad);
 	}
 }

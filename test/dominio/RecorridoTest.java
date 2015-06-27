@@ -3,7 +3,7 @@ package dominio;
 import org.junit.Assert;
 import org.junit.Test;
 
-import utilidades.RecorridoDTO;
+import utilidades.Ruta;
 
 public class RecorridoTest {
 
@@ -36,7 +36,7 @@ public class RecorridoTest {
 		Estacion estacion2 = new Estacion (2, "Urquiza");
 		Recorrido recorrido = new Recorrido (estacion1, estacion2);
 		
-		RecorridoDTO recorridoDTO = new RecorridoDTO (estacion1.getId(), estacion2.getId());
+		Ruta recorridoDTO = new Ruta (estacion1.getId(), estacion2.getId());
 		
 		Assert.assertEquals(recorridoDTO, recorrido.parsearADTO());
 	}	

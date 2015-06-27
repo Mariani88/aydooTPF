@@ -89,7 +89,7 @@ public class GeneradorDeEstadisticaTest {
 	public void generarEstadisticasDebeObtenerRecorridoMasRealizado(){
 		
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
-		List<RecorridoDTO> recorridosEsperados = new LinkedList<RecorridoDTO>();
+		List<Ruta> recorridosEsperados = new LinkedList<Ruta>();
 		
 		recorridosEsperados.add(this.recorridos.get(0).parsearADTO());
 		recorridosEsperados.add(this.recorridos.get(1).parsearADTO());
@@ -119,8 +119,8 @@ public class GeneradorDeEstadisticaTest {
 		List<Integer> idBicicletaInicializado = new LinkedList<Integer>();
 		idBicicletaInicializado.add(-1);
 
-		List<RecorridoDTO> idRecorridoInicializado = new LinkedList<RecorridoDTO>();
-		idRecorridoInicializado.add(new RecorridoDTO(0, 0));
+		List<Ruta> idRecorridoInicializado = new LinkedList<Ruta>();
+		idRecorridoInicializado.add(new Ruta(0, 0));
 
 		generador.terminar();
 		InformacionEstadistica infoReiniciada= generador.terminar();
@@ -147,7 +147,7 @@ public class GeneradorDeEstadisticaTest {
 		List <Integer> idBicicletasMenosUsadas = new LinkedList <Integer> ();
 		idBicicletasMenosUsadas.add(9);
 		
-		List<RecorridoDTO> recorridosEsperados = new LinkedList<RecorridoDTO>();
+		List<Ruta> recorridosEsperados = new LinkedList<Ruta>();
 		recorridosEsperados.add(recorridos.get(0).parsearADTO());
 		recorridosEsperados.add(recorridos.get(1).parsearADTO());
 		

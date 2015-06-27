@@ -190,12 +190,12 @@ public class GestorDeArchivos {
 	private void escribirIdRecorridosMasRealizados(InformacionEstadistica info,
 			PrintWriter pw) {
 
-		Iterator<RecorridoDTO> iterador = info.recorridosMasRealizados()
+		Iterator<Ruta> iterador = info.recorridosMasRealizados()
 				.iterator();
 
 		while (iterador.hasNext()) {
 
-			RecorridoDTO recorrido = iterador.next();
+			Ruta recorrido = iterador.next();
 			pw.println("id origen:" + recorrido.getIdEstacionOrigen());
 			pw.println("id destino:" + recorrido.getIdEstacionDestino());
 			pw.println("");
@@ -246,6 +246,15 @@ public class GestorDeArchivos {
 			throw new IllegalArgumentException("El directorio con el path: "
 					+ path + "no existe");
 		}
+	}
+
+	public void moverZipAProcesados(ZipFile archivoZip) {
+		
+		String path = archivoZip.getName();
+		
+		File zipAMover = new File(path);
+		
+		zipAMover.renameTo(new File("procesados/"+zipAMover.getName()));
 	}
 
 }
