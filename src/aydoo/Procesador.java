@@ -1,9 +1,12 @@
 package aydoo;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Scanner;
 import java.util.zip.ZipFile;
+
 import dominio.Bicicleta;
 import dominio.InformacionEstadistica;
 import utilidades.GeneradorDeEstadistica;
@@ -23,12 +26,42 @@ public class Procesador {
         gestorDeArchivos = new GestorDeArchivos ();
        
         if(args.length == 2 && args[1].equals("demonio")){
+        	evaluarDirectorioDeTrabajo();
             monitorDeDirectorio = new MonitorDeDirectorio (directorioDeTrabajo);
             monitorDeDirectorio.monitorear();
         }else{
+        	evaluarDirectorioDeTrabajo();
             comenzarProcesamiento();
         }
     }
+    
+    private static void evaluarDirectorioDeTrabajo()  {
+		
+		boolean configuracionCorrecta = comprobarExistenciaDeDirectorio (directorioDeTrabajo);
+		Scanner escaner = new Scanner (System.in);
+		
+		while (!configuracionCorrecta){
+			System.out.print ("Ingrese directorio:");
+			directorioDeTrabajo = escaner.next();
+			configuracionCorrecta = comprobarExistenciaDeDirectorio (directorioDeTrabajo);
+		}
+		
+		gestorDeArchivos = new GestorDeArchivos ();
+		escaner.close();
+	}
+    
+    private static boolean comprobarExistenciaDeDirectorio(
+			String directorioDeTrabajo) {
+		
+		File directorioAEvaluar = new File (directorioDeTrabajo);
+		boolean existe = directorioAEvaluar.exists();
+		
+		if (!existe){
+			System.out.println ("No existe el directorio.");
+		}
+		
+		return existe;
+	}
    
     private static void comenzarProcesamiento () { //ACA VA LA LOGICA DE PROCESAMIENTO
         generadorDeEstadisticas = new GeneradorDeEstadistica ();
