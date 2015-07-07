@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
+
 import org.junit.Assert;
 import org.junit.Test;
+
 import dominio.Bicicleta;
 import dominio.InformacionEstadistica;
 
@@ -27,7 +29,7 @@ public class GestorDeArchivosTest {
 		GestorDeArchivos gestorDeArchivos = new GestorDeArchivos();
 		gestorDeArchivos.obtenerArchivosZip(PATH_INVALIDO);
 	}	
-	
+
 	
 	/*@Test
 	public void obtenerArchivosZipDebeSoloDevolverZips() throws ZipException,
@@ -116,7 +118,6 @@ public class GestorDeArchivosTest {
 		}
 		Assert.assertEquals(cantidadTotalDeBicicletasEnElZip, bicicletas.size());
 	}
-	
 	
 	@Test 
 	public void moverArchivoZipAProcesados() throws IOException{

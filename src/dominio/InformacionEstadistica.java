@@ -1,11 +1,15 @@
 package dominio;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
+
 import excepciones.BicicletaMasUsadaExcepcion;
 import excepciones.BicicletaMenosUsadaExcepcion;
 import excepciones.RecorridoMasRealizadoExcepcion;
@@ -17,6 +21,8 @@ public class InformacionEstadistica {
 	private Map <Integer, Integer> bicicletasMenosUsadas;
 	private Map <Ruta, Integer> recorridoMasRealizado;
 	private int tiempoPromedio;
+	private Set<Bicicleta> bicicletasUsadasMasTiempo;
+	private Integer tiempoDeBicicletaMasUsada = 0;
 	
 	
 	public InformacionEstadistica (){
@@ -27,6 +33,7 @@ public class InformacionEstadistica {
 		this.bicicletasMenosUsadas.put(-1, 2147483647);
 		this.recorridoMasRealizado = new HashMap <Ruta, Integer> ();
 		this.recorridoMasRealizado.put(new Ruta (0,0), 0);
+		this.bicicletasUsadasMasTiempo = new TreeSet<Bicicleta>();		
 		this.tiempoPromedio = -1;
 	}
 
@@ -191,5 +198,32 @@ public class InformacionEstadistica {
 
 	public void evaluarRecorrido(Ruta ruta, int cantidad) {
 		this.guardarMaximoRecorrido(ruta, cantidad);
+	}
+	
+	public void generarBicicletasUsadasMasTiempo(Map <Bicicleta, Integer> bicicletas){
+		
+		Integer tiempoMaximo = Collections.max(bicicletas.values());		
+		
+		for (Map.Entry<Bicicleta, Integer> b : bicicletas.entrySet()) {
+			Bicicleta bici = b.getKey();
+			Integer tiempo = b.getValue();
+			if (tiempo.equals(tiempoMaximo)) {				
+				this.bicicletasUsadasMasTiempo.add(bici);
+			}			
+		}
+
+	}
+	
+	public Set<Bicicleta> getBicicletasUsadasMasTiempo(){
+		return this.bicicletasUsadasMasTiempo;
+	}
+	
+	public Integer getTiempoDeBicicletaMasUsada(){
+		return this.tiempoDeBicicletaMasUsada;
+	}
+
+
+	public void setTiempoDeBicicletaMasUsada(Integer tiempo) {
+		this.tiempoDeBicicletaMasUsada = tiempo;
 	}
 }

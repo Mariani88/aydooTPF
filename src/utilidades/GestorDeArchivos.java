@@ -88,7 +88,7 @@ public class GestorDeArchivos {
 			InputStream stream = archivoZip.getInputStream(archivoCSV);
 			InputStreamReader inputStreamReader = new InputStreamReader(stream);
 			bufferDeLectura = new BufferedReader(inputStreamReader);
-			saltearElEncabezadoDelCSV();
+			saltearElEncabezadoDelCSV();			
 			esPrimeraLecturaDelArchivoCSV = Boolean.FALSE;
 		}
 		while (bicicletas.size() < cantidad
@@ -176,7 +176,21 @@ public class GestorDeArchivos {
 		this.escribirIdRecorridosMasRealizados(info, pw);
 
 		pw.println("Tiempo promedio de uso: " + info.getTiempoPromedio());
-		pw.close();
+		
+		pw.println("Bicicletas utilizada mas tiempo: ");
+		this.escribirIdsBicicletasUsadasMasTiempo(info, pw);
+		
+		pw.println("Tiempo de la bicicleta mas utilizada: "+ info.getTiempoDeBicicletaMasUsada());
+		
+		pw.close();		
+	}
+
+	private void escribirIdsBicicletasUsadasMasTiempo(
+			InformacionEstadistica info, PrintWriter pw) {
+		for (Bicicleta b:info.getBicicletasUsadasMasTiempo()){
+			pw.println("id:" + b.getId());
+		}
+		
 	}
 
 	private void escribirIdRecorridosMasRealizados(InformacionEstadistica info,

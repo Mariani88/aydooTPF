@@ -1,7 +1,11 @@
 package dominio;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,7 +33,6 @@ public class InformacionEstadisticaTest {
 				this.info.bicicletasMasUsadas());
 	}
 	
-	
 	@Test
 	public void getBicicletasMasUsadasNoDebeDevolverMaximoViejos() {
 		
@@ -44,7 +47,6 @@ public class InformacionEstadisticaTest {
 				this.info.bicicletasMasUsadas());
 	}
 	
-
 	@Test
 	public void BicicletasMenosUsadasDebeDevolverListaDeBicicletasMenosUsadas() {
 
@@ -104,8 +106,6 @@ public class InformacionEstadisticaTest {
 		
 	}
 	
-	
-	
 	@Test(expected=BicicletaMasUsadaExcepcion.class)
 	public void excepcionSiSeIntentaGuardarBicicletaConMenorUsoAlMaximo (){
 		this.info.guardarBicicletasMasUsadas(2, 1);
@@ -145,7 +145,6 @@ public class InformacionEstadisticaTest {
 		Assert.assertEquals(bicicletasEsperadas, this.info.bicicletasMenosUsadas());
 	}
 	
-	
 	@Test
 	public void evaluarDatoBicicletaDebeGuardarMinimoYRemoverViejosMinimos() {
 
@@ -174,4 +173,84 @@ public class InformacionEstadisticaTest {
 		
 		Assert.assertEquals(recorridosEsperados, this.info.recorridosMasRealizados());	
 	}
+	
+	@Test
+	public void getBicicletasUsadasMasTiempoDebeDevolverBici123Test(){
+		Recorrido recorrido1 = new Recorrido(new Estacion(12, "Palermo"), new Estacion(10, "Once"));
+		Bicicleta bici = new Bicicleta(123, recorrido1);
+		Map <Bicicleta,Integer> tiemposDeBicicletas = new HashMap<Bicicleta, Integer>();
+		tiemposDeBicicletas.put(bici, 16);		
+		InformacionEstadistica info = new InformacionEstadistica();
+		info.generarBicicletasUsadasMasTiempo(tiemposDeBicicletas);
+		Set <Bicicleta> conjuntoDeBicicletasUsadasMasTiempo =info.getBicicletasUsadasMasTiempo();
+		
+		Assert.assertEquals(1 ,conjuntoDeBicicletasUsadasMasTiempo.size());
+		Assert.assertTrue(conjuntoDeBicicletasUsadasMasTiempo.contains(bici));
+		Assert.assertEquals(123, conjuntoDeBicicletasUsadasMasTiempo.iterator().next().getId());
+	}
+	
+	@Test
+	public void getBicicletasUsadasMasTiempoDebeDevolverBici200PeroNoBici300Test(){
+		Recorrido recorrido1 = new Recorrido(new Estacion(12, "Palermo"), new Estacion(10, "Once"));
+		Bicicleta bici200 = new Bicicleta(200, recorrido1);
+		Bicicleta bici300 = new Bicicleta(300, recorrido1);
+		Map <Bicicleta,Integer> tiemposDeBicicletas = new HashMap<Bicicleta, Integer>();
+		tiemposDeBicicletas.put(bici200, 50);
+		tiemposDeBicicletas.put(bici300, 30);
+		InformacionEstadistica info = new InformacionEstadistica();
+		info.generarBicicletasUsadasMasTiempo(tiemposDeBicicletas);
+		Set <Bicicleta> conjuntoDeBicicletasUsadasMasTiempo =info.getBicicletasUsadasMasTiempo();
+		
+		Assert.assertEquals(1 ,conjuntoDeBicicletasUsadasMasTiempo.size());
+		Assert.assertTrue(conjuntoDeBicicletasUsadasMasTiempo.contains(bici200));
+		Assert.assertEquals(200, conjuntoDeBicicletasUsadasMasTiempo.iterator().next().getId());
+	}
+	
+	@Test
+	public void getBicicletasUsadasMasTiempoDebeDevolverBici200Bici300PeroNoBici400Test(){
+		Recorrido recorrido1 = new Recorrido(new Estacion(12, "Palermo"), new Estacion(10, "Once"));
+		Bicicleta bici200 = new Bicicleta(200, recorrido1);
+		Bicicleta bici300 = new Bicicleta(300, recorrido1);
+		Bicicleta bici400 = new Bicicleta(400, recorrido1);
+		Map <Bicicleta,Integer> tiemposDeBicicletas = new HashMap<Bicicleta, Integer>();
+		tiemposDeBicicletas.put(bici200, 50);
+		tiemposDeBicicletas.put(bici300, 30);
+		tiemposDeBicicletas.put(bici400, 50);
+		InformacionEstadistica info = new InformacionEstadistica();
+		info.generarBicicletasUsadasMasTiempo(tiemposDeBicicletas);
+		Set <Bicicleta> conjuntoDeBicicletasUsadasMasTiempo =info.getBicicletasUsadasMasTiempo();
+		Iterator <Bicicleta> iterador = conjuntoDeBicicletasUsadasMasTiempo.iterator();
+		
+		Assert.assertEquals(2 ,conjuntoDeBicicletasUsadasMasTiempo.size());
+		Assert.assertTrue(conjuntoDeBicicletasUsadasMasTiempo.contains(bici200));
+		Assert.assertTrue(conjuntoDeBicicletasUsadasMasTiempo.contains(bici400));
+		Assert.assertEquals(200, iterador.next().getId());
+		Assert.assertEquals(400, iterador.next().getId());
+	}
+	
+	@Test
+	public void getBicicletasUsadasMasTiempoDebeDevolverBici123Bici145yBici150Test(){
+		Recorrido recorrido1 = new Recorrido(new Estacion(12, "Palermo"), new Estacion(10, "Once"));
+		Bicicleta bici1 = new Bicicleta(123, recorrido1);
+		Bicicleta bici2 = new Bicicleta(145, recorrido1);
+		Bicicleta bici3 = new Bicicleta(150, recorrido1);
+		Map <Bicicleta,Integer> tiemposDeBicicletas = new HashMap<Bicicleta, Integer>();
+		tiemposDeBicicletas.put(bici1, 16);
+		tiemposDeBicicletas.put(bici2, 16);
+		tiemposDeBicicletas.put(bici3, 16);
+		InformacionEstadistica info = new InformacionEstadistica();
+		info.generarBicicletasUsadasMasTiempo(tiemposDeBicicletas);
+		Set <Bicicleta> conjuntoDeBicicletasUsadasMasTiempo =info.getBicicletasUsadasMasTiempo();
+		Iterator <Bicicleta> iterador = conjuntoDeBicicletasUsadasMasTiempo.iterator();
+		
+		Assert.assertEquals(3 ,conjuntoDeBicicletasUsadasMasTiempo.size());
+		Assert.assertTrue(conjuntoDeBicicletasUsadasMasTiempo.contains(bici1));
+		Assert.assertTrue(conjuntoDeBicicletasUsadasMasTiempo.contains(bici2));
+		Assert.assertTrue(conjuntoDeBicicletasUsadasMasTiempo.contains(bici3));		
+		Assert.assertEquals(123, iterador.next().getId());
+		Assert.assertEquals(145, iterador.next().getId());
+		Assert.assertEquals(150, iterador.next().getId());
+	}
+	
 }
+

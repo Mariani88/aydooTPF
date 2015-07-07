@@ -1,9 +1,9 @@
 package dominio;
 
-public class Bicicleta {
+public class Bicicleta implements Comparable<Object> {
 
 	private Recorrido recorrido;
-	private int id;
+	private Integer id;
 	
 	public Bicicleta (int id, Recorrido recorrido){
 		this.id = id;
@@ -37,4 +37,11 @@ public class Bicicleta {
 		
 		return this.id;
 	}
+
+	@Override
+	public int compareTo(Object o) {
+		Bicicleta bici = (Bicicleta)o;
+		return this.id.compareTo(bici.getId());
+	}
+
 }
