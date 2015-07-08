@@ -13,7 +13,7 @@ public class GeneradorDeEstadistica {
 
 	private Map<Integer, Integer> historialUsoDeBicicletas;
 	private Map<Ruta, Integer> historialUsoDeRecorridos;
-	private Map<Bicicleta, Integer> tiempoDeUsoDeBicicletas;	
+	private Map<Bicicleta, Integer> tiempoDeUsoDeBicicletas;
 	private InformacionEstadistica estadistica;
 	private int tiempoTotal;
 	private int bicicletasProcesadas;
@@ -22,7 +22,7 @@ public class GeneradorDeEstadistica {
 		this.historialUsoDeBicicletas = new HashMap<Integer, Integer>();
 		this.historialUsoDeRecorridos = new HashMap<Ruta, Integer>();
 		this.estadistica = new InformacionEstadistica();
-		this.tiempoDeUsoDeBicicletas = new HashMap <Bicicleta, Integer>();
+		this.tiempoDeUsoDeBicicletas = new HashMap<Bicicleta, Integer>();
 		this.tiempoTotal = 0;
 		this.bicicletasProcesadas = 0;
 	}
@@ -47,38 +47,36 @@ public class GeneradorDeEstadistica {
 
 			Bicicleta bicicleta = iterador.next();
 			this.almacenarHistorialDeUsoYEvaluar(bicicleta);
-			this.almacenarHistorialDeRecorridosYEvaluar(bicicleta
-					.getRecorrido());
+			this.almacenarHistorialDeRecorridosYEvaluar(bicicleta.getRecorrido());
 			this.actualizarPromedioDeUso(bicicleta);
 			this.almacenarTiempoDeUsoDeBicicletas(bicicleta);
 		}
 		estadistica.generarBicicletasUsadasMasTiempo(tiempoDeUsoDeBicicletas);
 		Integer tiempo = this.calcularTiempoDeBicicletaMasUsada(tiempoDeUsoDeBicicletas);
 		estadistica.setTiempoDeBicicletaMasUsada(tiempo);
-		
+
 	}
 
-	private Integer calcularTiempoDeBicicletaMasUsada(
-			Map<Bicicleta, Integer> tiempoDeUsoDeBicicletas) {
-			Integer tiempoMayor = 0;
-			Integer tiempoDeBiciActual =0;
-			List<Integer> bicisId = estadistica.bicicletasMasUsadas();
-			for (Integer i:bicisId){
-				Bicicleta bicicletaMasUsada = new Bicicleta(i,null);
-				tiempoDeBiciActual = tiempoDeUsoDeBicicletas.get(bicicletaMasUsada);  								
-				if (tiempoDeBiciActual > tiempoMayor){ 
-					tiempoMayor = tiempoDeBiciActual;
-				}
-			}						
+	private Integer calcularTiempoDeBicicletaMasUsada(Map<Bicicleta, Integer> tiempoDeUsoDeBicicletas) {
+		Integer tiempoMayor = 0;
+		Integer tiempoDeBiciActual = 0;
+		List<Integer> bicisId = estadistica.bicicletasMasUsadas();
+		for (Integer i : bicisId) {
+			Bicicleta bicicletaMasUsada = new Bicicleta(i, null);
+			tiempoDeBiciActual = tiempoDeUsoDeBicicletas.get(bicicletaMasUsada);
+			if (tiempoDeBiciActual > tiempoMayor) {
+				tiempoMayor = tiempoDeBiciActual;
+			}
+		}
 		return tiempoMayor;
 	}
 
 	private void almacenarTiempoDeUsoDeBicicletas(Bicicleta bicicleta) {
-		   	Integer tiempo = bicicleta.getRecorrido().getMinutosRecorridos();		   	
-		   	if (tiempoDeUsoDeBicicletas.containsKey(bicicleta)){
-		   		tiempo = tiempo + tiempoDeUsoDeBicicletas.get(bicicleta);
-		   	}
-		   	tiempoDeUsoDeBicicletas.put(bicicleta, tiempo);		     	
+		Integer tiempo = bicicleta.getRecorrido().getMinutosRecorridos();
+		if (tiempoDeUsoDeBicicletas.containsKey(bicicleta)) {
+			tiempo = tiempo + tiempoDeUsoDeBicicletas.get(bicicleta);
+		}
+		tiempoDeUsoDeBicicletas.put(bicicleta, tiempo);
 	}
 
 	private void actualizarPromedioDeUso(Bicicleta bicicleta) {
@@ -108,13 +106,13 @@ public class GeneradorDeEstadistica {
 	public InformacionEstadistica terminar() {
 
 		InformacionEstadistica info = this.estadistica;
-		this.estadistica = new InformacionEstadistica ();
+		this.estadistica = new InformacionEstadistica();
 		this.bicicletasProcesadas = 0;
 		this.tiempoTotal = 0;
 		this.historialUsoDeBicicletas = new HashMap<Integer, Integer>();
 		this.historialUsoDeRecorridos = new HashMap<Ruta, Integer>();
-		this.tiempoDeUsoDeBicicletas = new HashMap <Bicicleta, Integer>();
-		
+		this.tiempoDeUsoDeBicicletas = new HashMap<Bicicleta, Integer>();
+
 		return info;
 	}
 }
