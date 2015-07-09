@@ -27,8 +27,6 @@ public class LectorDeBicicletas {
 
 		try {
 			bicicletas = generarBicicletas(stream);
-
-			System.out.println("Termino");
 		} catch (IOException | InterruptedException | ExecutionException e) {
 			System.out.println("Error al generar la lista de bicicletas.");
 		}
