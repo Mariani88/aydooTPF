@@ -23,11 +23,7 @@ import dominio.InformacionEstadistica;
 
 public class GestorDeArchivos {
 
-	private Enumeration<? extends ZipEntry> archivosCSV;
-	private ZipEntry archivoCSV;
 	private ZipFile archivoZip;
-	private Boolean esPrimeraLecturaDelArchivoZip;
-	private Boolean esPrimeraLecturaDelArchivoCSV;
 
 	private ZipFile[] filtrarArchivos(File[] listaArchivosEnDirectorio) throws ZipException, IOException {
 
@@ -57,30 +53,22 @@ public class GestorDeArchivos {
 	}
 
 	public void asignarArchivoZipParaProcesar(ZipFile archivoZip) {
-		esPrimeraLecturaDelArchivoZip = Boolean.TRUE;
-		esPrimeraLecturaDelArchivoCSV = Boolean.TRUE;
 		this.archivoZip = archivoZip;
 	}
 
 	public List<Bicicleta> obtenerListaDeBicicletas() throws IOException {
 		List<Bicicleta> bicicletas = new ArrayList<Bicicleta>();
-		if (esPrimeraLecturaDelArchivoZip) {
-			if (archivoZip == null) {
-				return null;
-			}
-			archivosCSV = leerArchivosCSVContenidosEnZip(archivoZip);
-			esPrimeraLecturaDelArchivoZip = Boolean.FALSE;
-		}
-		if (esPrimeraLecturaDelArchivoCSV) {
-			archivoCSV = archivosCSV.nextElement();
-			InputStream stream = archivoZip.getInputStream(archivoCSV);
-			esPrimeraLecturaDelArchivoCSV = Boolean.FALSE;
-			LectorDeBicicletas lector = new LectorDeBicicletas();
-			bicicletas = lector.leer(stream);
+		if (archivoZip == null) {
+			return null;
 		}
 
-		if (archivosCSV.hasMoreElements()) {
-			esPrimeraLecturaDelArchivoCSV = Boolean.TRUE;
+		Enumeration<? extends ZipEntry> archivosCSV = archivoZip.entries();
+
+		while (archivosCSV.hasMoreElements()) {
+			ZipEntry archivoCSV = archivosCSV.nextElement();
+			InputStream stream = archivoZip.getInputStream(archivoCSV);
+			LectorDeBicicletas lector = new LectorDeBicicletas();
+			bicicletas = lector.leer(stream);
 		}
 
 		return bicicletas;
@@ -179,12 +167,6 @@ public class GestorDeArchivos {
 		}
 
 		pw.println("");
-	}
-
-	public Enumeration<? extends ZipEntry> leerArchivosCSVContenidosEnZip(ZipFile zipFiles) {
-		Enumeration<? extends ZipEntry> listaDeArchivosCSVEnZip = zipFiles.entries();
-
-		return listaDeArchivosCSVEnZip;
 	}
 
 	private void comprobarPath(Path path) {

@@ -20,9 +20,6 @@ public class GestorDeArchivosTest {
 	private String PATH_INVALIDO = "path invalido";
 	private String PATH_ARCHIVOS_ZIP = "paraTestear/archivosZipParaTest";
 
-	// private String PATH_ARCHIVOS_MEZCLADOS =
-	// "documentos/directorioArchivosMezclados";
-
 	@Test(expected = IllegalArgumentException.class)
 	public void cuandoSeQuiereObtenerArchivosDeUnDirectorioInexistenteEsperoExcepcion() throws ZipException, IOException {
 

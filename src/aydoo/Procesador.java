@@ -21,7 +21,6 @@ public class Procesador {
 	private static String directorioDeTrabajo = null;
 
 	public static void main(String args[]) throws IOException {
-
 		directorioDeTrabajo = args[0];
 		gestorDeArchivos = new GestorDeArchivos();
 
@@ -73,16 +72,14 @@ public class Procesador {
 			for (int i = 0; i < archivosZip.length; i++) {
 				gestorDeArchivos.asignarArchivoZipParaProcesar(archivosZip[i]);
 				List<Bicicleta> bicicletas = gestorDeArchivos.obtenerListaDeBicicletas();
-
-				while (bicicletas.size() != 0) {
-					generadorDeEstadisticas.generarEstadistica(bicicletas);
-					bicicletas = gestorDeArchivos.obtenerListaDeBicicletas();
-				}
+				generadorDeEstadisticas.generarEstadistica(bicicletas);
 				gestorDeArchivos.moverZipAProcesados(archivosZip[i]);
 			}
 
 			long endTime = System.currentTimeMillis();
 			String tiempoTotalDeProcesamiento = tiempoTotalDeProcesamiento(endTime - startTime);
+
+			System.out.println(tiempoTotalDeProcesamiento);
 
 			InformacionEstadistica estadisticas = generadorDeEstadisticas.terminar();
 			estadisticas.setTiempoDeProcesamiento(tiempoTotalDeProcesamiento);

@@ -27,6 +27,8 @@ public class LectorDeBicicletas {
 
 		try {
 			bicicletas = generarBicicletas(stream);
+
+			System.out.println("Termino");
 		} catch (IOException | InterruptedException | ExecutionException e) {
 			System.out.println("Error al generar la lista de bicicletas.");
 		}
@@ -60,10 +62,9 @@ public class LectorDeBicicletas {
 
 	private List<Callable<List<Bicicleta>>> generarCallablesPorBucket(CharBuffer buffer, int tamanioTotal, int tamanioBucket) {
 		List<Callable<List<Bicicleta>>> callables = new ArrayList<Callable<List<Bicicleta>>>();
-
 		for (int i = 0, hasta = 0; tamanioTotal > 0; ++i, tamanioTotal -= tamanioBucket) {
 			int desde = Math.max(i * tamanioBucket, hasta);
-			hasta = buscarSaltoDeLinea(desde + tamanioBucket, buffer, tamanioBucket / 2);
+			hasta = buscarSaltoDeLinea(desde + tamanioBucket, buffer, tamanioBucket / 8);
 			generateCallablesByRange(buffer, callables, hasta, desde);
 		}
 		return callables;
@@ -111,7 +112,7 @@ public class LectorDeBicicletas {
 			return limite;
 		int umbral = Math.min(inicio + delta, limite);
 		for (int i = umbral; i >= inicio; --i) {
-			String saltoChar = Character.toString(buffer.charAt(0));
+			String saltoChar = Character.toString(buffer.charAt(i));
 			if (saltoDeLinea.contains(saltoChar))
 				return i;
 		}
