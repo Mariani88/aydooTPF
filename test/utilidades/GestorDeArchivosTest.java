@@ -66,18 +66,6 @@ public class GestorDeArchivosTest {
 	}
 
 	@Test
-	public void obtenerMenosBicicletasDeLasHayEnArchivoCSV() throws ZipException, IOException, ParseException {
-		GestorDeArchivos gestor = new GestorDeArchivos();
-
-		ZipFile[] archivosZip = gestor.obtenerArchivosZip(PATH_ARCHIVOS_ZIP);
-		gestor.asignarArchivoZipParaProcesar(archivosZip[0]);
-
-		List<Bicicleta> bicicletas = gestor.obtenerListaDeBicicletas();
-
-		Assert.assertEquals(450404, bicicletas.size());
-	}
-
-	@Test
 	public void obtenertTodasLasBicicletasDeLasQueHayEnUnArchivoZipPidiendoDeAMil() throws ZipException, IOException, ParseException {
 		GestorDeArchivos gestor = new GestorDeArchivos();
 		ZipFile zip = new ZipFile(PATH_ARCHIVOS_ZIP + "/recorridos-2010.zip");
