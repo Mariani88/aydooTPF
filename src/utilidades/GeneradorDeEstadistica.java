@@ -40,21 +40,19 @@ public class GeneradorDeEstadistica {
 	}
 
 	public void generarEstadistica(List<Bicicleta> bicicletas) {
-
 		Iterator<Bicicleta> iterador = bicicletas.iterator();
 
 		while (iterador.hasNext()) {
-
 			Bicicleta bicicleta = iterador.next();
 			this.almacenarHistorialDeUsoYEvaluar(bicicleta);
 			this.almacenarHistorialDeRecorridosYEvaluar(bicicleta.getRecorrido());
 			this.actualizarPromedioDeUso(bicicleta);
 			this.almacenarTiempoDeUsoDeBicicletas(bicicleta);
 		}
+
 		estadistica.generarBicicletasUsadasMasTiempo(tiempoDeUsoDeBicicletas);
 		Integer tiempo = this.calcularTiempoDeBicicletaMasUsada(tiempoDeUsoDeBicicletas);
 		estadistica.setTiempoDeBicicletaMasUsada(tiempo);
-
 	}
 
 	private Integer calcularTiempoDeBicicletaMasUsada(Map<Bicicleta, Integer> tiempoDeUsoDeBicicletas) {

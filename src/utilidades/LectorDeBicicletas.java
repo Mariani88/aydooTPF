@@ -21,6 +21,13 @@ import dominio.Bicicleta;
 
 public class LectorDeBicicletas {
 
+	private ExecutorService executorService;
+
+	public LectorDeBicicletas() {
+		int procesadores = Runtime.getRuntime().availableProcessors();
+		executorService = Executors.newFixedThreadPool(procesadores * 2);
+	}
+
 	public List<Bicicleta> leer(InputStream stream) {
 		List<Bicicleta> bicicletas = new ArrayList<Bicicleta>();
 		validarStreamVacio(stream);
@@ -44,13 +51,11 @@ public class LectorDeBicicletas {
 		CharBuffer buffer = getCharBuffer(inputStream);
 
 		int tamanioTotal = buffer.length();
-		int procesadores = Runtime.getRuntime().availableProcessors();
-		int calls = 16;
+		int calls = 100;
 		int tamanioBucket = (int) ((buffer.length() + 0.5) / calls);
 
 		List<Callable<List<Bicicleta>>> callables = generarCallablesPorBucket(buffer, tamanioTotal, tamanioBucket);
 
-		ExecutorService executorService = Executors.newFixedThreadPool(procesadores * 2);
 		List<Bicicleta> bicicletas = getBicicletas(callables, executorService);
 
 		executorService.shutdown();
@@ -62,7 +67,7 @@ public class LectorDeBicicletas {
 		List<Callable<List<Bicicleta>>> callables = new ArrayList<Callable<List<Bicicleta>>>();
 		for (int i = 0, hasta = 0; tamanioTotal > 0; ++i, tamanioTotal -= tamanioBucket) {
 			int desde = Math.max(i * tamanioBucket, hasta);
-			hasta = buscarSaltoDeLinea(desde + tamanioBucket, buffer, tamanioBucket / 8);
+			hasta = buscarSaltoDeLinea(desde + tamanioBucket, buffer, tamanioBucket / 100);
 			generateCallablesByRange(buffer, callables, hasta, desde);
 		}
 		return callables;

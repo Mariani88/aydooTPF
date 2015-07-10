@@ -72,7 +72,11 @@ public class Procesador {
 			for (int i = 0; i < archivosZip.length; i++) {
 				gestorDeArchivos.asignarArchivoZipParaProcesar(archivosZip[i]);
 				List<Bicicleta> bicicletas = gestorDeArchivos.obtenerListaDeBicicletas();
-				generadorDeEstadisticas.generarEstadistica(bicicletas);
+
+				while (bicicletas.size() != 0) {
+					generadorDeEstadisticas.generarEstadistica(bicicletas);
+					bicicletas = gestorDeArchivos.obtenerListaDeBicicletas();
+				}
 				gestorDeArchivos.moverZipAProcesados(archivosZip[i]);
 			}
 

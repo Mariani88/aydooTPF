@@ -24,6 +24,9 @@ import dominio.InformacionEstadistica;
 public class GestorDeArchivos {
 
 	private ZipFile archivoZip;
+	private Boolean esPrimeraLecturaDelArchivoCSV;
+	private Boolean esPrimeraLecturaDelArchivoZip;
+	private Enumeration<? extends ZipEntry> archivosCSV;
 
 	private ZipFile[] filtrarArchivos(File[] listaArchivosEnDirectorio) throws ZipException, IOException {
 
@@ -53,22 +56,32 @@ public class GestorDeArchivos {
 	}
 
 	public void asignarArchivoZipParaProcesar(ZipFile archivoZip) {
+		esPrimeraLecturaDelArchivoCSV = Boolean.TRUE;
+		esPrimeraLecturaDelArchivoZip = Boolean.TRUE;
 		this.archivoZip = archivoZip;
 	}
 
 	public List<Bicicleta> obtenerListaDeBicicletas() throws IOException {
 		List<Bicicleta> bicicletas = new ArrayList<Bicicleta>();
-		if (archivoZip == null) {
-			return null;
+
+		if (esPrimeraLecturaDelArchivoZip) {
+			if (archivoZip == null) {
+				return null;
+			}
+			archivosCSV = archivoZip.entries();
+			esPrimeraLecturaDelArchivoZip = Boolean.FALSE;
 		}
 
-		Enumeration<? extends ZipEntry> archivosCSV = archivoZip.entries();
-
-		while (archivosCSV.hasMoreElements()) {
+		if (esPrimeraLecturaDelArchivoCSV) {
 			ZipEntry archivoCSV = archivosCSV.nextElement();
 			InputStream stream = archivoZip.getInputStream(archivoCSV);
 			LectorDeBicicletas lector = new LectorDeBicicletas();
 			bicicletas = lector.leer(stream);
+			esPrimeraLecturaDelArchivoCSV = Boolean.FALSE;
+		}
+
+		if (archivosCSV.hasMoreElements()) {
+			esPrimeraLecturaDelArchivoCSV = Boolean.TRUE;
 		}
 
 		return bicicletas;
