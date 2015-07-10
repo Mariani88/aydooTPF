@@ -51,7 +51,7 @@ public class LectorDeBicicletas {
 		CharBuffer buffer = getCharBuffer(inputStream);
 
 		int tamanioTotal = buffer.length();
-		int calls = 100;
+		int calls = 16;
 		int tamanioBucket = (int) ((buffer.length() + 0.5) / calls);
 
 		List<Callable<List<Bicicleta>>> callables = generarCallablesPorBucket(buffer, tamanioTotal, tamanioBucket);
@@ -67,7 +67,7 @@ public class LectorDeBicicletas {
 		List<Callable<List<Bicicleta>>> callables = new ArrayList<Callable<List<Bicicleta>>>();
 		for (int i = 0, hasta = 0; tamanioTotal > 0; ++i, tamanioTotal -= tamanioBucket) {
 			int desde = Math.max(i * tamanioBucket, hasta);
-			hasta = buscarSaltoDeLinea(desde + tamanioBucket, buffer, tamanioBucket / 100);
+			hasta = buscarSaltoDeLinea(desde + tamanioBucket, buffer, tamanioBucket / 16);
 			generateCallablesByRange(buffer, callables, hasta, desde);
 		}
 		return callables;
