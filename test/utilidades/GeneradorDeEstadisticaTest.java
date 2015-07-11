@@ -158,4 +158,57 @@ public class GeneradorDeEstadisticaTest {
 		Assert.assertEquals(recorridosEsperados, info.recorridosMasRealizados());
 		Assert.assertEquals(tiempoPromedio, info.getTiempoPromedio());
 	}
+	
+	@Test 
+	public void generarEstadisticaDebeCrearInformacionEstadisticaConTiempoDe60Test(){
+		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
+		List<Bicicleta> bicis = new LinkedList<Bicicleta>();
+		Recorrido recorrido1 = new Recorrido(new Estacion(10, "Palermo"), new Estacion(12, "Once"));
+		recorrido1.setMinutosRecorridos(60);
+		Bicicleta bici1 = new Bicicleta(1, recorrido1);		
+		bicis.add(bici1);		
+		generador.generarEstadistica(bicis);
+		InformacionEstadistica info = generador.terminar();
+		
+		Assert.assertEquals(new Integer(3600), info.getTiempoDeBicicletaMasUsada());
+	}
+	
+	@Test 
+	public void generarEstadisticaDebeCrearInformacionEstadisticaConTiempoTotalDeBici1Test(){
+		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
+		List<Bicicleta> bicis = new LinkedList<Bicicleta>();
+		Recorrido recorrido1 = new Recorrido(new Estacion(10, "Palermo"), new Estacion(12, "Once"));
+		recorrido1.setMinutosRecorridos(50);
+		Recorrido recorrido2 = new Recorrido(new Estacion(15, "Retiro"), new Estacion(12, "Once"));
+		recorrido2.setMinutosRecorridos(150);
+		Bicicleta bici1 = new Bicicleta(1, recorrido1);	
+		Bicicleta bici2 = new Bicicleta(2, recorrido2);		
+		bicis.add(bici1);	
+		bicis.add(bici2);
+		bicis.add(bici1);  
+		//bici1 es la mas usada, hace 2 viajes de 50, total 100
+		generador.generarEstadistica(bicis);
+		InformacionEstadistica info = generador.terminar();
+		
+		Assert.assertEquals(new Integer(6000), info.getTiempoDeBicicletaMasUsada());
+	}
+	
+	@Test 
+	public void generadorDebeCrearInformacionConTiempoMayorDeBiciMasUsadaTest(){
+		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
+		List<Bicicleta> bicis = new LinkedList<Bicicleta>();
+		Recorrido recorrido1 = new Recorrido(new Estacion(10, "Palermo"), new Estacion(12, "Once"));
+		recorrido1.setMinutosRecorridos(50);
+		Recorrido recorrido2 = new Recorrido(new Estacion(15, "Retiro"), new Estacion(12, "Once"));
+		recorrido2.setMinutosRecorridos(150);
+		Bicicleta bici1 = new Bicicleta(1, recorrido1);	
+		Bicicleta bici2 = new Bicicleta(2, recorrido2);		
+		bicis.add(bici1);	
+		bicis.add(bici2);		
+		generador.generarEstadistica(bicis);
+		InformacionEstadistica info = generador.terminar();
+		
+		Assert.assertEquals(new Integer(9000), info.getTiempoDeBicicletaMasUsada());
+	}
+		
 }
