@@ -66,7 +66,7 @@ public class GeneradorDeEstadistica {
 				tiempoMayor = tiempoDeBiciActual;
 			}
 		}
-		return tiempoMayor;
+		return tiempoMayor * 60;
 	}
 
 	private void almacenarTiempoDeUsoDeBicicletas(Bicicleta bicicleta) {

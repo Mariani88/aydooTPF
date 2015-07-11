@@ -170,7 +170,7 @@ public class GeneradorDeEstadisticaTest {
 		generador.generarEstadistica(bicis);
 		InformacionEstadistica info = generador.terminar();
 		
-		Assert.assertEquals(new Integer(60), info.getTiempoDeBicicletaMasUsada());
+		Assert.assertEquals(new Integer(3600), info.getTiempoDeBicicletaMasUsada());
 	}
 	
 	@Test 
@@ -190,7 +190,7 @@ public class GeneradorDeEstadisticaTest {
 		generador.generarEstadistica(bicis);
 		InformacionEstadistica info = generador.terminar();
 		
-		Assert.assertEquals(new Integer(100), info.getTiempoDeBicicletaMasUsada());
+		Assert.assertEquals(new Integer(6000), info.getTiempoDeBicicletaMasUsada());
 	}
 	
 	@Test 
@@ -208,7 +208,7 @@ public class GeneradorDeEstadisticaTest {
 		generador.generarEstadistica(bicis);
 		InformacionEstadistica info = generador.terminar();
 		
-		Assert.assertEquals(new Integer(150), info.getTiempoDeBicicletaMasUsada());
+		Assert.assertEquals(new Integer(9000), info.getTiempoDeBicicletaMasUsada());
 	}
 		
 }
