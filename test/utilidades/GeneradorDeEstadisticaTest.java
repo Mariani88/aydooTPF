@@ -66,7 +66,7 @@ public class GeneradorDeEstadisticaTest {
 		idBicicletasMasUsadas.add(1);
 		idBicicletasMasUsadas.add(3);
 
-		generador.generarEstadistica(bicicletas);
+		generador.generarDatosEstadisticos(bicicletas);
 
 		Assert.assertEquals(idBicicletasMasUsadas, generador.terminar()
 				.bicicletasMasUsadas());
@@ -79,7 +79,7 @@ public class GeneradorDeEstadisticaTest {
 		List<Integer> idBicicletasMenosUsadas = new LinkedList<Integer>();
 		idBicicletasMenosUsadas.add(9);
 		
-		generador.generarEstadistica(bicicletas);
+		generador.generarDatosEstadisticos(bicicletas);
 
 		Assert.assertEquals(idBicicletasMenosUsadas, generador.terminar()
 				.bicicletasMenosUsadas());
@@ -94,7 +94,7 @@ public class GeneradorDeEstadisticaTest {
 		recorridosEsperados.add(this.recorridos.get(0).parsearARuta());
 		recorridosEsperados.add(this.recorridos.get(1).parsearARuta());
 		
-		generador.generarEstadistica(bicicletas);
+		generador.generarDatosEstadisticos(bicicletas);
 		Assert.assertEquals(recorridosEsperados, generador.terminar().recorridosMasRealizados());
 	}
 	
@@ -103,7 +103,7 @@ public class GeneradorDeEstadisticaTest {
 	public void generarEstadisticasDebeObtenerPromedioDeUsoDeBicicletas(){
 		
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
-		generador.generarEstadistica(bicicletas);
+		generador.generarDatosEstadisticos(bicicletas);
 		
 		int tiempoPromedio = 14;		
 		Assert.assertEquals(tiempoPromedio, generador.terminar().getTiempoPromedio());
@@ -114,7 +114,7 @@ public class GeneradorDeEstadisticaTest {
 	public void terminarDebeDevolverInformacionYReiniciarParametros (){
 		
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
-		generador.generarEstadistica(bicicletas);
+		generador.generarDatosEstadisticos(bicicletas);
 
 		List<Integer> idBicicletaInicializado = new LinkedList<Integer>();
 		idBicicletaInicializado.add(-1);
@@ -135,9 +135,9 @@ public class GeneradorDeEstadisticaTest {
 	public void terminarDebeReiniciarParametrosDeCalculo (){
 		
 		GeneradorDeEstadistica generador = new GeneradorDeEstadistica();
-		generador.generarEstadistica(bicicletas);
+		generador.generarDatosEstadisticos(bicicletas);
 		generador.terminar();
-		generador.generarEstadistica(bicicletas);
+		generador.generarDatosEstadisticos(bicicletas);
 		InformacionEstadistica info = generador.terminar();
 		
 		List<Integer> idBicicletasMasUsadas = new LinkedList<Integer>();

@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import excepciones.BicicletaMasUsadaExcepcion;
 import excepciones.BicicletaMenosUsadaExcepcion;
 import excepciones.RecorridoMasRealizadoExcepcion;
@@ -169,27 +170,25 @@ public class InformacionEstadistica {
 	}
 
 
-	public void evaluarUsoBicicleta(int id, int cantidad) {
+	public void evaluarUsoBicicleta(Map <Integer, Integer> historialBicicletas) {
 
-		this.guardarMaximoBicicleta(id, cantidad);
-
-		boolean existe = this.bicicletasMenosUsadas.containsKey(id);
-		boolean hayOtroId = this.bicicletasMenosUsadas.size() > 0;
-
-		if (existe && hayOtroId) {
-			
-			this.bicicletasMenosUsadas.remove(id);
-			
-		} else if (!existe && !hayOtroId) {
-			
-			this.bicicletasMenosUsadas.put(id, cantidad);
-			
-		} else
-			
-			this.guardarMinimoBicicleta(id, cantidad);
+		Iterator <Entry<Integer,Integer>> iterador = historialBicicletas.entrySet().iterator();
+		
+		while (iterador.hasNext()){
+			Entry<Integer,Integer> par = iterador.next();
+			this.guardarMaximoBicicleta(par.getKey(), par.getValue());
+			this.guardarMinimoBicicleta(par.getKey(), par.getValue());
+		}
 	}
 
-	public void evaluarRecorrido(Ruta ruta, int cantidad) {
-		this.guardarMaximoRecorrido(ruta, cantidad);
+	public void evaluarRecorridos(Map <Ruta, Integer> historialRecorridos) {
+		
+		Iterator <Entry<Ruta, Integer>> iterador = historialRecorridos.entrySet().iterator();
+		
+		while ( iterador.hasNext()){
+			
+			Entry<Ruta,Integer> par = iterador.next();
+			this.guardarMaximoRecorrido(par.getKey(), par.getValue());	
+		}
 	}
 }

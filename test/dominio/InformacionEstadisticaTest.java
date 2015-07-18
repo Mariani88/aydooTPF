@@ -1,7 +1,9 @@
 package dominio;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -129,17 +131,27 @@ public class InformacionEstadisticaTest {
 		
 		this.info.guardarBicicletasMasUsadas(3, 100);
 		List <Integer> bicicletasEsperadas = new LinkedList <Integer>();
-		this.info.evaluarUsoBicicleta (9,200);
-		bicicletasEsperadas.add(9);
+		Map <Integer,Integer> historial = new HashMap<Integer,Integer> ();
+		historial.put(9,2000);
+		historial.put(8,200);
+		historial.put(4,200);
+		historial.put(19,2000);
 		
-		Assert.assertEquals(bicicletasEsperadas, this.info.bicicletasMasUsadas());
+		this.info.evaluarUsoBicicleta (historial);
+		bicicletasEsperadas.add(9);
+		bicicletasEsperadas.add(19);
+		
+		Assert.assertTrue(bicicletasEsperadas.containsAll( this.info.bicicletasMasUsadas()) );
 	}
 	
 	@Test
 	public void evaluarDatoBicicletaDebeGuardarDatoSiEsMinimo (){
 		this.info.guardarBicicletasMenosUsadas(3, 100);
 		List <Integer> bicicletasEsperadas = new LinkedList <Integer>();
-		this.info.evaluarUsoBicicleta (9,10);
+		Map <Integer,Integer> historial = new HashMap<Integer,Integer> ();
+		historial.put(9,10);
+		
+		this.info.evaluarUsoBicicleta (historial);
 		bicicletasEsperadas.add(9);
 		
 		Assert.assertEquals(bicicletasEsperadas, this.info.bicicletasMenosUsadas());
@@ -150,28 +162,43 @@ public class InformacionEstadisticaTest {
 	public void evaluarDatoBicicletaDebeGuardarMinimoYRemoverViejosMinimos() {
 
 		List<Integer> bicicletasEsperadas = new LinkedList<Integer>();
-		this.info.evaluarUsoBicicleta(1, 1);
-		this.info.evaluarUsoBicicleta(3, 1);
-		this.info.evaluarUsoBicicleta(3, 2);
-		this.info.evaluarUsoBicicleta(9, 1);
-		this.info.evaluarUsoBicicleta(1, 2);
-		this.info.evaluarUsoBicicleta(1, 3);
-		this.info.evaluarUsoBicicleta(3, 3);
+		
+		Map <Integer, Integer> historialBicicletas = new HashMap<Integer,Integer> ();
+		
+		historialBicicletas.put(3, 2);
+		historialBicicletas.put(9, 2);
+		historialBicicletas.put(4, 7);
+		historialBicicletas.put(6, 10);
+		historialBicicletas.put(10, 10);
+		
+		this.info.evaluarUsoBicicleta(historialBicicletas);
+		
 		bicicletasEsperadas.add(9);
-
-		Assert.assertEquals(bicicletasEsperadas,
-				this.info.bicicletasMenosUsadas());
+		bicicletasEsperadas.add(3);
+		
+		Assert.assertTrue(bicicletasEsperadas.containsAll(this.info.bicicletasMenosUsadas()));
 	}
 	
 	@Test
-	public void evaluarDatoDebeGuardarDatoSiRecorridoEsMaximo (){
+	public void evaluarRecorridosDebeGuardarRecorridoMaximo (){
 		
 		this.info.guardarRecorridoMasRealizado(new Ruta (1,1),200);
 		
 		List<Ruta> recorridosEsperados = new LinkedList<Ruta> ();
 		recorridosEsperados.add(new Ruta (2,2));
-		this.info.evaluarRecorrido(new Ruta (2,2), 3000);
+		recorridosEsperados.add(new Ruta (3,2));
 		
-		Assert.assertEquals(recorridosEsperados, this.info.recorridosMasRealizados());	
+		Map<Ruta, Integer> historialRecorridos = new HashMap <Ruta, Integer> ();
+		
+		historialRecorridos.put(new Ruta (2,2), 1000);
+		historialRecorridos.put(new Ruta (3,2), 1000);
+		historialRecorridos.put(new Ruta (6,2), 1);
+		historialRecorridos.put(new Ruta (7,2), 10);
+		
+			
+		this.info.evaluarRecorridos(historialRecorridos);
+		
+		Assert.assertTrue (recorridosEsperados.containsAll(this.info.recorridosMasRealizados()));
+		
 	}
 }

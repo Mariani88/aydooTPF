@@ -76,7 +76,7 @@ public class Procesador {
                 System.out.println ("procesando archivos, espere..."+ porcentaje + "%");
                
                 while (bicicletas.size() != 0){
-                    generadorDeEstadisticas.generarEstadistica(bicicletas);
+                    generadorDeEstadisticas.generarDatosEstadisticos(bicicletas);
                     bicicletas = gestorDeArchivos.obtenerListaDeBicicletas(500);
                 }
                 gestorDeArchivos.moverZipAProcesados(archivosZip [i]);

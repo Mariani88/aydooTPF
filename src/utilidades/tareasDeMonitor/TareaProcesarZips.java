@@ -37,7 +37,7 @@ public class TareaProcesarZips extends TimerTask{
 				System.out.println ("procesando archivos, espere..."+ porcentaje + "%");
 				
 				while (bicicletas.size() != 0){ //leo todos los CSV del zip
-					generadorDeEstadisticas.generarEstadistica(bicicletas);
+					generadorDeEstadisticas.generarDatosEstadisticos(bicicletas);
 					bicicletas = gestorDeArchivos.obtenerListaDeBicicletas(500);
 				}
 
